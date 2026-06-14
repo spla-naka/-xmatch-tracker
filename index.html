@@ -527,31 +527,15 @@ function renderDash(){
     <div class="sec-lbl">全記録</div>
     <div class="records">${allRecords}</div>
   `;
+  const chartSets=filterRule==="ALL"?[]:filteredSets;
   if(filterRule==="ALL"){
-    document.getElementById("chart-container").innerHTML=RULES.map(r=>{
-      const rs=sets.filter(s=>s.rule===r);
-      if(!rs.length) return `<div style="color:var(--muted);font-size:13px;margin-bottom:8px;padding:8px 0">
-        <span style="color:${COLORS[r]};font-weight:700">${r}</span> — 記録なし</div>`;
-      return `<div style="margin-bottom:14px">
-        <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:${COLORS[r]};margin-bottom:6px">
-          <span style="color:${COLORS[r]}">${ICONS_SM[r]}</span>${r}
-        </div>
-        <div class="chart-area" style="padding:10px"><canvas id="chart-${r}" height="140" style="width:100%;height:140px"></canvas></div>
-      </div>`;
-    }).join("");
-    requestAnimationFrame(()=>{
-      RULES.forEach(r=>{
-        const rs=sets.filter(s=>s.rule===r);
-        if(rs.length) drawChart(rs,`chart-${r}`,140,r);
-      });
-    });
+    document.getElementById("chart-container").innerHTML=
+      `<div style="color:var(--muted);font-size:13px;padding:16px 0 8px">ルールを選択するとXP推移グラフが表示されます。</div>`;
   } else {
     document.getElementById("chart-container").innerHTML=
       `<div class="chart-legend" id="chart-legend"></div>
-       <div class="chart-area"><canvas id="chart-${filterRule}" height="240" style="width:100%;height:240px"></canvas></div>`;
-    requestAnimationFrame(()=>{
-      drawChart(filteredSets,`chart-${filterRule}`,240,filterRule);
-    });
+       <div class="chart-area"><canvas id="chart-main" height="240" style="display:block"></canvas></div>`;
+    requestAnimationFrame(()=>drawChart(filteredSets,"chart-main",240,filterRule));
   }
 }
 
@@ -569,12 +553,11 @@ function drawChart(sets){
   const cw=W-pad.left-pad.right,ch=240-pad.top-pad.bottom;
   const ruleData={};
   showRules.forEach(r=>{
-    const pts=sets.filter(s=>s.rule===r).map((s,i)=>({x:i,xpAfter:s.xpAfter}));
+    const pts=sets.map((s,i)=>({x:i,xpAfter:s.xpAfter}));
     if(pts.length) ruleData[r]=pts;
   });
-  const totalSets=Math.max(...Object.values(ruleData).map(p=>p.length),1);
-  const toX=i=>pad.left+(totalSets<=1?cw/2:(i/Math.max(totalSets-1,1))*cw);
-  const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
+  const totalSets=sets.length;
+  const toX=i=>pad.left+(totalSets<=1?cw/2:(i/Math.max(totalSets-1,1))*cw);  const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
   // グリッド
   ctx.strokeStyle="rgba(255,255,255,0.06)";ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
