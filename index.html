@@ -281,16 +281,43 @@ const ICONS={
     <circle cx="13" cy="3" r="2" fill="currentColor"/>
   </svg>`,
   ホコ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="13" cy="11" rx="6" ry="8" fill="currentColor" opacity=".85"/>
-    <ellipse cx="13" cy="9" rx="3.5" ry="5" fill="currentColor"/>
-    <path d="M8 17 Q13 22 18 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
-    <circle cx="13" cy="23" r="2" fill="currentColor" opacity=".7"/>
+    <!-- 尾ひれ（上反り） -->
+    <path d="M13 3 C10 3 8 1 9 0 C10 2 13 1.5 16 0 C17 1 15 3 13 3Z" fill="currentColor"/>
+    <!-- 背びれ -->
+    <path d="M11 7 C11 5 12 4 13 3 C14 4 15 5 15 7Z" fill="currentColor" opacity=".85"/>
+    <!-- 胴体（シャチホコ反り） -->
+    <path d="M8 22 C7 18 7 14 9 11 C10 9 11 8 13 7 C15 8 16 9 17 11 C19 14 19 18 18 22Z" fill="currentColor" opacity=".9"/>
+    <!-- 頭部 -->
+    <path d="M9 11 C9 9 10 8 11 7 L15 7 C16 8 17 9 17 11 C17 13 15 14 13 14 C11 14 9 13 9 11Z" fill="currentColor"/>
+    <!-- 目 -->
+    <circle cx="11.5" cy="10.5" r="1" fill="white" opacity=".9"/>
+    <circle cx="11.8" cy="10.3" r="0.45" fill="#0a0e18"/>
+    <!-- うろこ線 -->
+    <path d="M10 15 Q13 14 16 15" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
+    <path d="M9.5 17.5 Q13 16.5 16.5 17.5" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
+    <path d="M9.5 20 Q13 19 16.5 20" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
+    <!-- 台座 -->
+    <rect x="10" y="22" width="6" height="2" rx="1" fill="currentColor" opacity=".7"/>
+    <rect x="9" y="23.5" width="8" height="1.5" rx=".75" fill="currentColor" opacity=".5"/>
   </svg>`,
   アサリ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13 4 C7 4 3 8 3 13 C3 18 7 22 13 22 C19 22 23 18 23 13 C23 8 19 4 13 4Z" fill="currentColor" opacity=".8"/>
-    <path d="M3 13 Q8 10 13 13 Q18 16 23 13" stroke="white" stroke-width="1.2" fill="none" opacity=".5"/>
-    <path d="M5 17 Q10 14 13 17 Q16 20 21 17" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
-    <path d="M5 9 Q10 12 13 9 Q16 6 21 9" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
+    <!-- 貝殻外形（扇形） -->
+    <path d="M13 22 C7 22 2 17 2 12 C2 8 5 5 8 4 C9.5 3.2 11 3 13 3 C15 3 16.5 3.2 18 4 C21 5 24 8 24 12 C24 17 19 22 13 22Z" fill="currentColor" opacity=".85"/>
+    <!-- 放射状の筋（貝殻らしさ） -->
+    <line x1="13" y1="22" x2="13" y2="3" stroke="white" stroke-width="0.7" opacity=".35"/>
+    <line x1="13" y1="22" x2="4" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/>
+    <line x1="13" y1="22" x2="22" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/>
+    <line x1="13" y1="22" x2="2.5" y2="13" stroke="white" stroke-width="0.6" opacity=".25"/>
+    <line x1="13" y1="22" x2="23.5" y2="13" stroke="white" stroke-width="0.6" opacity=".25"/>
+    <line x1="13" y1="22" x2="7" y2="5.5" stroke="white" stroke-width="0.6" opacity=".25"/>
+    <line x1="13" y1="22" x2="19" y2="5.5" stroke="white" stroke-width="0.6" opacity=".25"/>
+    <!-- 同心円弧（成長線） -->
+    <path d="M7 18 Q13 20 19 18" stroke="white" stroke-width="0.8" fill="none" opacity=".4"/>
+    <path d="M5.5 14 Q13 17 20.5 14" stroke="white" stroke-width="0.8" fill="none" opacity=".35"/>
+    <path d="M5 10 Q13 13.5 21 10" stroke="white" stroke-width="0.7" fill="none" opacity=".3"/>
+    <path d="M6 7 Q13 10 20 7" stroke="white" stroke-width="0.6" fill="none" opacity=".25"/>
+    <!-- 殻頂（てっぺんの丸み） -->
+    <ellipse cx="13" cy="4" rx="3" ry="2" fill="currentColor"/>
   </svg>`
 };
 
@@ -298,8 +325,8 @@ const ICONS={
 const ICONS_SM={
   エリア:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="3" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="14" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="3" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="14" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="9" y="9" width="8" height="8" rx="1" fill="currentColor"/></svg>`,
   ヤグラ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="10" y="18" width="6" height="6" rx="1" fill="currentColor"/><rect x="11" y="8" width="4" height="11" rx="1" fill="currentColor"/><rect x="6" y="10" width="14" height="3" rx="1.5" fill="currentColor"/><rect x="9" y="5" width="8" height="5" rx="2" fill="currentColor" opacity=".8"/><circle cx="13" cy="3" r="2" fill="currentColor"/></svg>`,
-  ホコ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><ellipse cx="13" cy="11" rx="6" ry="8" fill="currentColor" opacity=".85"/><ellipse cx="13" cy="9" rx="3.5" ry="5" fill="currentColor"/><path d="M8 17 Q13 22 18 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="13" cy="23" r="2" fill="currentColor" opacity=".7"/></svg>`,
-  アサリ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M13 4 C7 4 3 8 3 13 C3 18 7 22 13 22 C19 22 23 18 23 13 C23 8 19 4 13 4Z" fill="currentColor" opacity=".8"/><path d="M3 13 Q8 10 13 13 Q18 16 23 13" stroke="white" stroke-width="1.2" fill="none" opacity=".5"/></svg>`
+  ホコ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M13 3 C10 3 8 1 9 0 C10 2 13 1.5 16 0 C17 1 15 3 13 3Z" fill="currentColor"/><path d="M8 22 C7 18 7 14 9 11 C10 9 11 8 13 7 C15 8 16 9 17 11 C19 14 19 18 18 22Z" fill="currentColor" opacity=".9"/><path d="M9 11 C9 9 10 8 11 7 L15 7 C16 8 17 9 17 11 C17 13 15 14 13 14 C11 14 9 13 9 11Z" fill="currentColor"/><circle cx="11.5" cy="10.5" r="1" fill="white" opacity=".9"/><rect x="10" y="22" width="6" height="2" rx="1" fill="currentColor" opacity=".7"/></svg>`,
+  アサリ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M13 22 C7 22 2 17 2 12 C2 8 5 5 8 4 C9.5 3.2 11 3 13 3 C15 3 16.5 3.2 18 4 C21 5 24 8 24 12 C24 17 19 22 13 22Z" fill="currentColor" opacity=".85"/><line x1="13" y1="22" x2="13" y2="3" stroke="white" stroke-width="0.7" opacity=".35"/><line x1="13" y1="22" x2="4" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/><line x1="13" y1="22" x2="22" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/><path d="M7 18 Q13 20 19 18" stroke="white" stroke-width="0.8" fill="none" opacity=".4"/><path d="M5.5 14 Q13 17 20.5 14" stroke="white" stroke-width="0.8" fill="none" opacity=".35"/><ellipse cx="13" cy="4" rx="3" ry="2" fill="currentColor"/></svg>`
 };
 
 let selectedRule=null,selectedResult=null;
