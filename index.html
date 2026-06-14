@@ -528,7 +528,7 @@ function renderDash(){
     <div class="sec-lbl">全記録</div>
     <div class="records">${allRecords}</div>
   `;
-  drawChart(sets);
+  drawChart(filteredSets);
 }
 
 function onSeasonChange(){viewSeason=document.getElementById("season-select").value;renderDash()}
