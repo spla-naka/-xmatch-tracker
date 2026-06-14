@@ -523,12 +523,32 @@ function renderDash(){
     </div>
     <div class="grid2" style="margin-bottom:22px">${ruleCards}</div>
     <div class="filter-row">${filterBtns}</div>
-    <div class="chart-legend" id="chart-legend"></div>
-    <div class="chart-area"><canvas id="chart" height="240"></canvas></div>
+    <div id="chart-container"></div>
     <div class="sec-lbl">全記録</div>
     <div class="records">${allRecords}</div>
   `;
-  drawChart(filteredSets);
+  if(filterRule==="ALL"){
+    document.getElementById("chart-container").innerHTML=RULES.map(r=>{
+      const rs=sets.filter(s=>s.rule===r);
+      if(!rs.length) return `<div style="color:var(--muted);font-size:13px;margin-bottom:8px;padding:8px 0">
+        <span style="color:${COLORS[r]};font-weight:700">${r}</span> — 記録なし</div>`;
+      return `<div style="margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:${COLORS[r]};margin-bottom:6px">
+          <span style="color:${COLORS[r]}">${ICONS_SM[r]}</span>${r}
+        </div>
+        <div class="chart-area" style="padding:10px"><canvas id="chart-${r}" height="140"></canvas></div>
+      </div>`;
+    }).join("");
+    RULES.forEach(r=>{
+      const rs=sets.filter(s=>s.rule===r);
+      if(rs.length) drawChart(rs,`chart-${r}`,140,r);
+    });
+  } else {
+    document.getElementById("chart-container").innerHTML=
+      `<div class="chart-legend" id="chart-legend"></div>
+       <div class="chart-area"><canvas id="chart-${filterRule}" height="240"></canvas></div>`;
+    drawChart(filteredSets,`chart-${filterRule}`,240,filterRule);
+  }
 }
 
 function onSeasonChange(){viewSeason=document.getElementById("season-select").value;renderDash()}
@@ -601,7 +621,7 @@ function drawChart(sets){
       <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
     </span>`).join("");
 }
-window.addEventListener("resize",()=>{const s=getSets(viewSeason||currentSeason);if(s.length&&document.getElementById("chart"))drawChart(s)});
+window.addEventListener("resize",()=>{if(document.getElementById("pane-dash")&&!document.getElementById("pane-dash").classList.contains("hidden"))renderDash()});
 init();
 </script>
 </body>
