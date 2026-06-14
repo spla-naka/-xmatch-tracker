@@ -7,180 +7,195 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0d1117;
-  --bg2:#161b22;
-  --bg3:#1f2630;
-  --blue:#1EAEE4;
-  --blue-dim:#1485ad;
+  --bg:#0a0e18;
+  --bg2:#111827;
+  --bg3:#1a2235;
+  --blue:#1A56C4;
+  --blue-light:#2d6fe8;
+  --blue-glow:rgba(26,86,196,0.35);
   --yellow:#FFE000;
   --yellow-dim:#c9b200;
-  --white:#f0f4f8;
-  --muted:#7a8a9a;
-  --border:#2a3440;
-  --green:#1de090;
+  --yellow-glow:rgba(255,224,0,0.25);
+  --white:#eef2ff;
+  --muted:#6b7a99;
+  --border:#1e2d45;
+  --green:#00e676;
   --red:#ff4b6e;
-  --radius:10px;
-  --radius-lg:16px;
+  --radius:12px;
+  --radius-lg:18px;
+  --radius-xl:24px;
 }
-body{background:var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+body{background:var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh;overflow-x:hidden}
 
-/* インク背景装飾 */
 body::before{
   content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(ellipse 120px 80px at 8% 12%, rgba(30,174,228,0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 90px 140px at 92% 6%, rgba(255,224,0,0.13) 0%, transparent 70%),
-    radial-gradient(ellipse 200px 100px at 50% 98%, rgba(30,174,228,0.10) 0%, transparent 70%);
+    radial-gradient(ellipse 340px 240px at 0% 0%, rgba(26,86,196,0.2) 0%, transparent 65%),
+    radial-gradient(ellipse 260px 200px at 100% 0%, rgba(255,224,0,0.1) 0%, transparent 65%),
+    radial-gradient(ellipse 400px 160px at 50% 100%, rgba(26,86,196,0.12) 0%, transparent 70%);
 }
+
 #app{max-width:680px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
 
 /* ヘッダー */
-.header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
-.ink-logo{width:36px;height:36px;position:relative;flex-shrink:0}
-.ink-logo svg{width:36px;height:36px}
-h1{font-size:22px;font-weight:700;letter-spacing:.03em;
-  background:linear-gradient(90deg,var(--blue),var(--yellow));
+.header{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+h1{font-size:22px;font-weight:800;letter-spacing:.04em;
+  background:linear-gradient(100deg,#fff 0%,var(--yellow) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-sub{font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
 
 /* タブ */
-.tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg2);padding:5px;border-radius:var(--radius-lg);border:1px solid var(--border)}
-.tab{flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-size:15px;font-weight:500;background:transparent;color:var(--muted);transition:all .2s}
-.tab.active{background:var(--blue);color:#fff;box-shadow:0 2px 12px rgba(30,174,228,0.35)}
+.tabs{display:flex;gap:6px;margin-bottom:26px;background:var(--bg2);padding:5px;border-radius:var(--radius-xl);border:1px solid var(--border)}
+.tab{flex:1;padding:11px;border-radius:18px;border:none;cursor:pointer;font-size:15px;font-weight:700;background:transparent;color:var(--muted);transition:all .22s;letter-spacing:.02em}
+.tab.active{background:linear-gradient(135deg,var(--blue),var(--blue-light));color:#fff;box-shadow:0 2px 16px var(--blue-glow)}
 
-/* セクション */
-.lbl{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
+/* シーズンタグ */
+.season-tag{display:inline-flex;align-items:center;gap:6px;
+  background:rgba(26,86,196,0.15);border:1px solid rgba(26,86,196,0.4);
+  border-radius:20px;padding:5px 14px;font-size:13px;color:var(--blue-light);margin-bottom:20px;font-weight:600}
+
+/* ラベル */
+.lbl{display:block;font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .section{margin-bottom:22px}
 
-/* ルールボタン */
+/* グリッド */
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3s{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
 
-.rule-btn{padding:11px 4px;font-size:14px;font-weight:600;border-radius:var(--radius);cursor:pointer;
-  border:2px solid var(--border);background:var(--bg2);color:var(--muted);transition:all .18s;letter-spacing:.02em}
-.rule-btn:hover{border-color:var(--blue);color:var(--white)}
+/* ルールボタン */
+.rule-btn{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  padding:12px 4px 10px;font-size:13px;font-weight:700;border-radius:var(--radius);cursor:pointer;
+  border:1.5px solid var(--border);background:var(--bg2);color:var(--muted);
+  transition:all .18s;letter-spacing:.02em;position:relative;overflow:hidden}
+.rule-btn:hover{border-color:var(--blue);color:var(--white);background:var(--bg3)}
+.rule-btn svg{width:26px;height:26px;flex-shrink:0}
 
-.res-btn{padding:11px;font-size:15px;font-weight:600;border-radius:var(--radius);cursor:pointer;
-  border:2px solid var(--border);background:var(--bg2);transition:all .18s}
-.res-btn:hover{border-color:var(--muted)}
+/* 戦績ボタン */
+.res-btn{
+  padding:12px;font-size:16px;font-weight:800;border-radius:var(--radius);cursor:pointer;
+  border:1.5px solid var(--border);background:var(--bg2);transition:all .18s;letter-spacing:.02em}
+.res-btn:hover{background:var(--bg3)}
 
 /* XP入力 */
 .xp-row{display:flex;align-items:center;gap:12px}
 input[type=number],select{
-  padding:11px 14px;font-size:16px;border-radius:var(--radius);
-  border:2px solid var(--border);background:var(--bg2);color:var(--white);width:100%;
+  padding:12px 16px;font-size:17px;font-weight:600;border-radius:var(--radius);
+  border:1.5px solid var(--border);background:var(--bg2);color:var(--white);width:100%;
   outline:none;transition:border-color .18s}
-input[type=number]:focus,select:focus{border-color:var(--blue)}
-.diff{font-size:22px;font-weight:700;min-width:72px;text-align:right}
+input[type=number]:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow)}
+select:focus{border-color:var(--blue)}
+.diff{font-size:24px;font-weight:800;min-width:76px;text-align:right}
 
 /* 送信ボタン */
-.submit-btn{width:100%;padding:15px;font-size:16px;font-weight:700;border-radius:var(--radius);
-  border:none;cursor:pointer;letter-spacing:.05em;transition:all .2s;
+.submit-btn{
+  width:100%;padding:16px;font-size:16px;font-weight:800;border-radius:var(--radius);
+  border:none;cursor:pointer;letter-spacing:.06em;transition:all .22s;
   background:var(--bg2);color:var(--muted)}
 .submit-btn.ready{
-  background:linear-gradient(90deg,var(--blue),#0d8fc4);
-  color:#fff;box-shadow:0 4px 18px rgba(30,174,228,0.4)}
-.submit-btn.ready:active{transform:scale(0.98)}
+  background:linear-gradient(135deg,var(--blue) 0%,var(--blue-light) 100%);
+  color:#fff;box-shadow:0 4px 20px var(--blue-glow)}
+.submit-btn.ready:active{transform:scale(0.985);box-shadow:0 2px 10px var(--blue-glow)}
 
 /* 記録行 */
-.row{display:flex;align-items:center;justify-content:space-between;
-  padding:10px 14px;margin-bottom:6px;
+.row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 16px;margin-bottom:7px;
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:14px;
   transition:border-color .15s}
-.row:hover{border-color:var(--blue-dim)}
+.row:hover{border-color:rgba(26,86,196,0.5)}
 
 /* スタットカード */
-.stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
-.stat-lbl{font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase}
-.stat-val{font-size:22px;font-weight:700;color:var(--yellow)}
+.stat{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:16px 12px;text-align:center;position:relative;overflow:hidden}
+.stat::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-light))}
+.stat-lbl{font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
+.stat-val{font-size:24px;font-weight:800;color:var(--yellow)}
 
 /* ルール別カード */
-.rule-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;transition:border-color .15s}
-.rule-card:hover{border-color:var(--blue-dim)}
+.rule-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:16px 18px;transition:all .18s;position:relative;overflow:hidden}
+.rule-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.rule-card:hover{border-color:rgba(26,86,196,0.4);transform:translateY(-1px)}
+.rule-card-icon{width:28px;height:28px;margin-bottom:8px}
 
 /* フィルターボタン */
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.filter-btn{padding:6px 14px;font-size:13px;font-weight:600;border-radius:20px;cursor:pointer;
-  border:1px solid var(--border);background:var(--bg2);color:var(--muted);transition:all .15s}
+.filter-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;font-size:13px;font-weight:700;border-radius:20px;cursor:pointer;
+  border:1.5px solid var(--border);background:var(--bg2);color:var(--muted);transition:all .15s}
 .filter-btn:hover{border-color:var(--muted);color:var(--white)}
+.filter-btn svg{width:14px;height:14px}
 
 /* グラフ */
 .chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:8px}
 .legend-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
-.chart-area{width:100%;overflow-x:auto;margin-bottom:20px}
+.chart-area{width:100%;overflow-x:auto;margin-bottom:20px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px}
 
 /* 全記録 */
 .records{max-height:240px;overflow-y:auto}
 
 /* メンタルケア */
-.mental{background:rgba(255,224,0,0.08);border:1px solid rgba(255,224,0,0.3);
-  border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;
-  color:var(--yellow);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.close-btn{font-size:12px;padding:4px 10px;border-radius:6px;
-  border:1px solid rgba(255,224,0,0.4);background:transparent;cursor:pointer;color:var(--yellow);white-space:nowrap}
+.mental{
+  background:rgba(255,224,0,0.07);border:1px solid rgba(255,224,0,0.25);
+  border-radius:var(--radius);padding:13px 16px;margin-bottom:18px;
+  color:var(--yellow);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:500}
+.close-btn{font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid rgba(255,224,0,0.35);background:transparent;cursor:pointer;color:var(--yellow);white-space:nowrap;font-weight:600}
 
 /* アーカイブ */
-.sep{border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
-.archive-btn{font-size:13px;color:var(--muted);padding:8px 14px;border-radius:var(--radius);
-  border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s}
+.sep{border-top:1px solid var(--border);padding-top:18px;margin-top:22px}
+.archive-btn{font-size:13px;color:var(--muted);padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;font-weight:600;letter-spacing:.02em}
 .archive-btn:hover{color:var(--white);border-color:var(--muted)}
 
 /* 最高XP演出 */
-.overlay{position:fixed;inset:0;z-index:9999;
-  background:rgba(13,17,23,0.96);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  animation:fadeInOut 3.5s ease forwards;pointer-events:none}
-.overlay-ring{
-  width:220px;height:220px;border-radius:50%;
-  border:4px solid var(--yellow);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  animation:ringPulse 0.7s infinite alternate;
-  box-shadow:0 0 40px rgba(255,224,0,0.4),inset 0 0 40px rgba(255,224,0,0.08)}
-.overlay-title{font-size:26px;font-weight:700;color:var(--yellow);text-align:center;line-height:1.4;letter-spacing:.04em}
-.overlay-emoji{font-size:36px;margin-top:4px}
-.overlay-sub{color:rgba(255,255,255,.7);font-size:15px;margin-top:20px;letter-spacing:.03em}
+.overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,14,24,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeInOut 3.5s ease forwards;pointer-events:none}
+.overlay-ring{width:230px;height:230px;border-radius:50%;border:3px solid var(--yellow);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:ringPulse 0.75s infinite alternate;box-shadow:0 0 50px var(--yellow-glow),inset 0 0 50px rgba(255,224,0,0.06)}
+.overlay-title{font-size:24px;font-weight:800;color:var(--yellow);text-align:center;line-height:1.4;letter-spacing:.05em}
+.overlay-emoji{font-size:34px;margin-top:6px}
+.overlay-sub{color:rgba(255,255,255,.65);font-size:15px;margin-top:22px;letter-spacing:.04em;font-weight:500}
 @keyframes fadeInOut{0%{opacity:0}8%{opacity:1}80%{opacity:1}100%{opacity:0}}
-@keyframes ringPulse{0%{transform:scale(1);box-shadow:0 0 30px rgba(255,224,0,0.3)}100%{transform:scale(1.04);box-shadow:0 0 60px rgba(255,224,0,0.6)}}
+@keyframes ringPulse{0%{transform:scale(1);box-shadow:0 0 30px var(--yellow-glow)}100%{transform:scale(1.05);box-shadow:0 0 70px rgba(255,224,0,0.45)}}
 
-/* シーズン表示 */
-.season-tag{display:inline-block;background:rgba(30,174,228,0.12);border:1px solid rgba(30,174,228,0.3);
-  border-radius:20px;padding:4px 12px;font-size:13px;color:var(--blue);margin-bottom:18px}
+/* インク装飾 */
+.splat{position:fixed;pointer-events:none;z-index:0}
 
-/* その他 */
 .hidden{display:none}
-.empty{color:var(--muted);text-align:center;padding:48px 0;font-size:15px}
-.sec-lbl{font-size:12px;color:var(--muted);margin-bottom:10px;letter-spacing:.05em;text-transform:uppercase}
-
-/* インクスプラット装飾SVG */
-.splat{position:fixed;pointer-events:none;opacity:0.07;z-index:0}
+.empty{color:var(--muted);text-align:center;padding:52px 0;font-size:15px;line-height:1.8}
+.sec-lbl{font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 </style>
 </head>
 <body>
 
-<!-- インク装飾 -->
-<svg class="splat" style="top:-30px;right:-20px;width:180px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#1EAEE4" d="M100,20 C130,10 160,40 170,70 C185,110 160,150 130,165 C100,180 60,170 40,145 C15,115 20,70 45,45 C60,28 78,27 100,20Z"/>
-  <circle fill="#1EAEE4" cx="155" cy="40" r="18"/>
-  <circle fill="#1EAEE4" cx="175" cy="75" r="10"/>
-  <circle fill="#1EAEE4" cx="140" cy="20" r="12"/>
+<svg class="splat" style="top:-40px;right:-30px;width:200px;opacity:.06" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#1A56C4" d="M100,20C130,10 160,40 170,70C185,110 160,150 130,165C100,180 60,170 40,145C15,115 20,70 45,45C60,28 78,27 100,20Z"/>
+  <circle fill="#1A56C4" cx="155" cy="38" r="20"/><circle fill="#1A56C4" cx="178" cy="72" r="12"/><circle fill="#1A56C4" cx="142" cy="18" r="14"/>
 </svg>
-<svg class="splat" style="bottom:-20px;left:-10px;width:140px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <path fill="#FFE000" d="M90,30 C120,15 155,45 165,80 C178,122 155,158 120,168 C85,178 48,162 30,132 C8,96 18,54 48,35 C62,24 72,40 90,30Z"/>
-  <circle fill="#FFE000" cx="50" cy="160" r="14"/>
-  <circle fill="#FFE000" cx="25" cy="130" r="8"/>
+<svg class="splat" style="bottom:-30px;left:-20px;width:160px;opacity:.07" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#FFE000" d="M90,30C120,15 155,45 165,80C178,122 155,158 120,168C85,178 48,162 30,132C8,96 18,54 48,35C62,24 72,40 90,30Z"/>
+  <circle fill="#FFE000" cx="50" cy="162" r="16"/><circle fill="#FFE000" cx="24" cy="132" r="9"/>
 </svg>
 
 <div id="app">
   <div class="header">
-    <div class="ink-logo">
-      <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
-        <path fill="#1EAEE4" d="M18,4 C24,4 30,9 31,16 C32,22 28,28 22,31 C18,33 14,33 10,30 C5,26 4,19 7,13 C10,7 14,4 18,4Z"/>
-        <path fill="#FFE000" d="M18,10 C21,10 24,13 24,17 C24,21 21,24 18,24 C15,24 12,21 12,17 C12,13 15,10 18,10Z"/>
-        <rect fill="#0d1117" x="16" y="24" width="4" height="8" rx="2"/>
-      </svg>
+    <svg width="42" height="42" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="21" cy="21" r="21" fill="#1A56C4"/>
+      <path fill="#FFE000" d="M21,8C26,8 30,11 31,16C32.5,22 28,28 22,30C18,31.5 14,30 11,27C7,23 7,17 10,13C13,9 17,8 21,8Z"/>
+      <circle cx="21" cy="20" r="6" fill="#0a0e18"/>
+      <circle cx="23" cy="18" r="2" fill="#fff"/>
+      <rect fill="#1A56C4" x="19" y="28" width="4" height="7" rx="2"/>
+    </svg>
+    <div>
+      <h1>XMATCH TRACKER</h1>
+      <div class="header-sub">スプラトゥーン3 Xマッチ記録</div>
     </div>
-    <h1>Xマッチ 記録アプリ</h1>
   </div>
 
   <div class="tabs">
@@ -203,7 +218,10 @@ input[type=number]:focus,select:focus{border-color:var(--blue)}
 
   <!-- 記録タブ -->
   <div id="pane-record">
-    <div class="season-tag" id="season-label-tag"></div>
+    <div class="season-tag" id="season-label-tag">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#2d6fe8" stroke-width="1.5"/><path d="M6 3v3l2 1" stroke="#2d6fe8" stroke-width="1.2" stroke-linecap="round"/></svg>
+      <span id="season-label-text"></span>
+    </div>
 
     <div class="section">
       <label class="lbl">ルール</label>
@@ -222,9 +240,7 @@ input[type=number]:focus,select:focus{border-color:var(--blue)}
     </div>
 
     <button class="submit-btn" id="submit-btn" onclick="handleSubmit()" disabled>記録する</button>
-
-    <div id="recent-list" style="margin-top:24px"></div>
-
+    <div id="recent-list" style="margin-top:26px"></div>
     <div class="sep">
       <button class="archive-btn" onclick="handleNewSeason()">シーズンをアーカイブして新シーズン開始</button>
     </div>
@@ -232,7 +248,7 @@ input[type=number]:focus,select:focus{border-color:var(--blue)}
 
   <!-- 振り返りタブ -->
   <div id="pane-dash" class="hidden">
-    <div style="margin-bottom:16px;display:flex;align-items:center;gap:10px">
+    <div style="margin-bottom:18px;display:flex;align-items:center;gap:10px">
       <label class="lbl" style="margin:0;white-space:nowrap">シーズン</label>
       <select id="season-select" onchange="onSeasonChange()"></select>
     </div>
@@ -246,17 +262,54 @@ const RESULTS=[
   {label:"3-0",w:3,l:0},{label:"3-1",w:3,l:1},{label:"3-2",w:3,l:2},
   {label:"2-3",w:2,l:3},{label:"1-3",w:1,l:3},{label:"0-3",w:0,l:3}
 ];
-const COLORS={エリア:"#1EAEE4",ヤグラ:"#FFE000",ホコ:"#ff6b35",アサリ:"#1de090"};
+const COLORS={エリア:"#1A56C4",ヤグラ:"#FFE000",ホコ:"#ff6b35",アサリ:"#00e676"};
+
+// ルールアイコンSVG
+const ICONS={
+  エリア:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/>
+    <rect x="14" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/>
+    <rect x="3" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/>
+    <rect x="14" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/>
+    <rect x="9" y="9" width="8" height="8" rx="1" fill="currentColor"/>
+  </svg>`,
+  ヤグラ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="10" y="18" width="6" height="6" rx="1" fill="currentColor"/>
+    <rect x="11" y="8" width="4" height="11" rx="1" fill="currentColor"/>
+    <rect x="6" y="10" width="14" height="3" rx="1.5" fill="currentColor"/>
+    <rect x="9" y="5" width="8" height="5" rx="2" fill="currentColor" opacity=".8"/>
+    <circle cx="13" cy="3" r="2" fill="currentColor"/>
+  </svg>`,
+  ホコ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="13" cy="11" rx="6" ry="8" fill="currentColor" opacity=".85"/>
+    <ellipse cx="13" cy="9" rx="3.5" ry="5" fill="currentColor"/>
+    <path d="M8 17 Q13 22 18 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <circle cx="13" cy="23" r="2" fill="currentColor" opacity=".7"/>
+  </svg>`,
+  アサリ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M13 4 C7 4 3 8 3 13 C3 18 7 22 13 22 C19 22 23 18 23 13 C23 8 19 4 13 4Z" fill="currentColor" opacity=".8"/>
+    <path d="M3 13 Q8 10 13 13 Q18 16 23 13" stroke="white" stroke-width="1.2" fill="none" opacity=".5"/>
+    <path d="M5 17 Q10 14 13 17 Q16 20 21 17" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
+    <path d="M5 9 Q10 12 13 9 Q16 6 21 9" stroke="white" stroke-width="1" fill="none" opacity=".4"/>
+  </svg>`
+};
+
+// ルールアイコン（小）
+const ICONS_SM={
+  エリア:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="3" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="14" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="3" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="14" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="9" y="9" width="8" height="8" rx="1" fill="currentColor"/></svg>`,
+  ヤグラ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="10" y="18" width="6" height="6" rx="1" fill="currentColor"/><rect x="11" y="8" width="4" height="11" rx="1" fill="currentColor"/><rect x="6" y="10" width="14" height="3" rx="1.5" fill="currentColor"/><rect x="9" y="5" width="8" height="5" rx="2" fill="currentColor" opacity=".8"/><circle cx="13" cy="3" r="2" fill="currentColor"/></svg>`,
+  ホコ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><ellipse cx="13" cy="11" rx="6" ry="8" fill="currentColor" opacity=".85"/><ellipse cx="13" cy="9" rx="3.5" ry="5" fill="currentColor"/><path d="M8 17 Q13 22 18 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/><circle cx="13" cy="23" r="2" fill="currentColor" opacity=".7"/></svg>`,
+  アサリ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><path d="M13 4 C7 4 3 8 3 13 C3 18 7 22 13 22 C19 22 23 18 23 13 C23 8 19 4 13 4Z" fill="currentColor" opacity=".8"/><path d="M3 13 Q8 10 13 13 Q18 16 23 13" stroke="white" stroke-width="1.2" fill="none" opacity=".5"/></svg>`
+};
 
 let selectedRule=null,selectedResult=null;
 let seasons={},currentSeason="",flashTimer=null,viewSeason="",filterRule="ALL";
 
 function getCurrentSeasonId(){const n=new Date(),s=Math.floor(n.getMonth()/3);return `${n.getFullYear()}-S${s+1}`}
 function getSeasonLabel(id){
-  const [y,s]=id.split("-S");
+  const parts=id.split("-S");const y=parts[0];const s=parts[1]?parseInt(parts[1]):1;
   const starts=["1月","4月","7月","10月"],ends=["3月","6月","9月","12月"];
-  const i=parseInt(s)-1;
-  if(isNaN(i)||i<0||i>3)return id;
+  const i=s-1;if(isNaN(i)||i<0||i>3)return id;
   return `${y}年 ${starts[i]}〜${ends[i]}`;
 }
 function load(){try{const v=localStorage.getItem("xmatch_seasons");return v?JSON.parse(v):{}}catch{return{}}}
@@ -268,24 +321,32 @@ function init(){
   if(!seasons[currentSeason])seasons[currentSeason]=[];
   viewSeason=currentSeason;
   renderRuleBtns();renderResultBtns();
-  document.getElementById("season-label-tag").textContent="シーズン: "+getSeasonLabel(currentSeason);
+  document.getElementById("season-label-text").textContent=getSeasonLabel(currentSeason);
   renderRecent();
 }
 
 function renderRuleBtns(){
-  document.getElementById("rule-btns").innerHTML=RULES.map(r=>`
-    <button class="rule-btn" onclick="selectRule('${r}')"
-      style="${selectedRule===r?`border-color:${COLORS[r]};color:${COLORS[r]};background:rgba(${hexToRgb(COLORS[r])},0.12)`:""}">${r}</button>
-  `).join("");
+  document.getElementById("rule-btns").innerHTML=RULES.map(r=>{
+    const sel=selectedRule===r;
+    const col=COLORS[r];
+    const style=sel
+      ?`border-color:${col};color:${col};background:rgba(${hexToRgb(col)},0.13)`
+      :``;
+    return `<button class="rule-btn" onclick="selectRule('${r}')" style="${style}">
+      <span style="color:${sel?col:"var(--muted)"}">${ICONS[r]}</span>
+      ${r}
+    </button>`;
+  }).join("");
 }
+
 function renderResultBtns(){
   document.getElementById("result-btns").innerHTML=RESULTS.map(res=>{
     const win=res.w>res.l,sel=selectedResult?.label===res.label;
     const selStyle=sel?(win
-      ?`border-color:var(--green);color:var(--green);background:rgba(29,224,144,0.12)`
-      :`border-color:var(--red);color:var(--red);background:rgba(255,75,110,0.12)`):"";
-    const defColor=win?"color:var(--green)":"color:var(--red)";
-    return `<button class="res-btn" onclick="selectResult('${res.label}')" style="${sel?selStyle:defColor}">${res.label}</button>`;
+      ?`border-color:var(--green);color:var(--green);background:rgba(0,230,118,0.1)`
+      :`border-color:var(--red);color:var(--red);background:rgba(255,75,110,0.1)`)
+      :(win?`color:var(--green)`:`color:var(--red)`);
+    return `<button class="res-btn" onclick="selectResult('${res.label}')" style="${selStyle}">${res.label}</button>`;
   }).join("");
 }
 
@@ -310,8 +371,7 @@ function onXpInput(){
   const el=document.getElementById("xp-diff");
   if(!isNaN(xp)&&prev!==null){
     const d=xp-prev;
-    el.textContent=(d>=0?"+":"")+d;
-    el.style.color=d>=0?"var(--green)":"var(--red)";
+    el.textContent=(d>=0?"+":"")+d;el.style.color=d>=0?"var(--green)":"var(--red)";
     el.classList.remove("hidden");
   }else el.classList.add("hidden");
   checkSubmit();
@@ -319,8 +379,7 @@ function onXpInput(){
 function checkSubmit(){
   const ok=selectedRule&&selectedResult&&document.getElementById("xp-input").value!=="";
   const btn=document.getElementById("submit-btn");
-  btn.disabled=!ok;
-  btn.className="submit-btn"+(ok?" ready":"");
+  btn.disabled=!ok;btn.className="submit-btn"+(ok?" ready":"");
 }
 
 function handleSubmit(){
@@ -336,16 +395,14 @@ function handleSubmit(){
   if(recent.length===3&&recent.every(s=>(s.xpDiff??0)<0))document.getElementById("mental-msg").classList.remove("hidden");
   if(isHighest){
     const ov=document.getElementById("highest-overlay");ov.classList.remove("hidden");
-    if(flashTimer)clearTimeout(flashTimer);
-    flashTimer=setTimeout(()=>ov.classList.add("hidden"),3500);
+    if(flashTimer)clearTimeout(flashTimer);flashTimer=setTimeout(()=>ov.classList.add("hidden"),3500);
   }
   selectedRule=null;selectedResult=null;
   document.getElementById("xp-input").value="";
   document.getElementById("xp-diff").classList.add("hidden");
   renderRuleBtns();renderResultBtns();updateXpLabel();checkSubmit();
   const btn=document.getElementById("submit-btn");
-  btn.textContent="保存しました ✓";
-  setTimeout(()=>btn.textContent="記録する",1500);
+  btn.textContent="保存しました ✓";setTimeout(()=>btn.textContent="記録する",1500);
   renderRecent();
 }
 
@@ -355,19 +412,20 @@ function renderRecent(){
   if(!sets.length){el.innerHTML="";return}
   el.innerHTML=`<div class="sec-lbl">直近の記録</div>`+[...sets].reverse().slice(0,5).map(s=>`
     <div class="row">
-      <span style="color:${COLORS[s.rule]};font-weight:600;width:52px">${s.rule}</span>
-      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px">${s.w}-${s.l}</span>
-      <span style="font-weight:600">${s.xpAfter.toLocaleString()}</span>
-      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:58px;text-align:right;font-weight:600">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
+      <span style="display:inline-flex;align-items:center;gap:6px;color:${COLORS[s.rule]};font-weight:700;width:72px">
+        <span style="color:${COLORS[s.rule]}">${ICONS_SM[s.rule]}</span>${s.rule}
+      </span>
+      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px;font-weight:700">${s.w}-${s.l}</span>
+      <span style="font-weight:700">${s.xpAfter.toLocaleString()}</span>
+      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:62px;text-align:right;font-weight:700">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
     </div>`).join("");
 }
 
 function handleNewSeason(){
   if(!confirm(`現在のシーズン (${getSeasonLabel(currentSeason)}) をアーカイブして新しいシーズンを開始しますか？`))return;
   const newId=getCurrentSeasonId()+`-${Date.now()}`;
-  currentSeason=newId;seasons[currentSeason]=[];save();
-  viewSeason=currentSeason;
-  document.getElementById("season-label-tag").textContent="シーズン: "+getSeasonLabel(currentSeason);
+  currentSeason=newId;seasons[currentSeason]=[];save();viewSeason=currentSeason;
+  document.getElementById("season-label-text").textContent=getSeasonLabel(currentSeason);
   renderRecent();renderDash();
 }
 
@@ -393,56 +451,74 @@ function renderDash(){
   const latestXp={},startXp={};
   [...sets].reverse().forEach(s=>{if(!latestXp[s.rule])latestXp[s.rule]=s.xpAfter});
   sets.forEach(s=>{if(!startXp[s.rule])startXp[s.rule]=s.xpAfter});
+
+  const CARD_TOPS={エリア:"linear-gradient(90deg,#1A56C4,#2d6fe8)",ヤグラ:"linear-gradient(90deg,#c9b200,#FFE000)",ホコ:"linear-gradient(90deg,#c94e1a,#ff6b35)",アサリ:"linear-gradient(90deg,#00b359,#00e676)"};
   const ruleCards=RULES.map(r=>{
     const curr=latestXp[r];if(!curr)return"";
     const d2=startXp[r]!==undefined?curr-startXp[r]:null;
-    return `<div class="rule-card">
-      <div style="font-size:12px;color:${COLORS[r]};font-weight:700;margin-bottom:6px;letter-spacing:.04em">${r}</div>
-      <div style="font-size:24px;font-weight:700;color:var(--white)">${curr.toLocaleString()}</div>
-      ${d2!==null?`<div style="font-size:13px;color:${d2>=0?"var(--green)":"var(--red)"};margin-top:4px;font-weight:600">開始比 ${d2>=0?"+":""}${d2}</div>`:""}
+    return `<div class="rule-card" style="--card-top:${CARD_TOPS[r]}">
+      <style>.rule-card:nth-child(${RULES.indexOf(r)+1})::before{background:${CARD_TOPS[r]}}</style>
+      <div style="display:inline-flex;align-items:center;gap:7px;margin-bottom:8px">
+        <span style="color:${COLORS[r]}">${ICONS_SM[r]}</span>
+        <span style="font-size:13px;color:${COLORS[r]};font-weight:700;letter-spacing:.04em">${r}</span>
+      </div>
+      <div style="font-size:26px;font-weight:800;color:var(--white);letter-spacing:.02em">${curr.toLocaleString()}</div>
+      ${d2!==null?`<div style="font-size:13px;color:${d2>=0?"var(--green)":"var(--red)"};margin-top:5px;font-weight:700">開始比 ${d2>=0?"+":""}${d2}</div>`:""}
     </div>`;
   }).join("");
-  const filterBtns=["ALL",...RULES].map(r=>`
-    <button class="filter-btn" onclick="setFilter('${r}')"
-      style="${filterRule===r?`background:${r==="ALL"?"var(--blue)":COLORS[r]};color:${r==="ヤグラ"?"#111":"#fff"};border-color:transparent`:""}">${r}</button>
-  `).join("");
+
+  const filterBtns=["ALL",...RULES].map(r=>{
+    const sel=filterRule===r;
+    const bg=sel?(r==="ALL"?"linear-gradient(135deg,var(--blue),var(--blue-light))":
+      `linear-gradient(135deg,${COLORS[r]},${COLORS[r]}cc)`):"";
+    const col=sel?(r==="ヤグラ"?"#111":"#fff"):"var(--muted)";
+    const icon=r!=="ALL"?`<span style="color:${sel?(r==="ヤグラ"?"#111":"#fff"):COLORS[r]}">${ICONS_SM[r]}</span>`:"";
+    return `<button class="filter-btn" onclick="setFilter('${r}')"
+      style="${sel?`background:${bg};color:${col};border-color:transparent;box-shadow:0 2px 10px rgba(0,0,0,0.3)`:""}">${icon}${r}</button>`;
+  }).join("");
+
   const allRecords=[...sets].reverse().map(s=>`
     <div class="row">
-      <span style="color:${COLORS[s.rule]};font-weight:600;width:52px">${s.rule}</span>
-      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px">${s.w}-${s.l}</span>
-      <span style="font-weight:600">${s.xpAfter.toLocaleString()}</span>
-      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:58px;text-align:right;font-weight:600">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
+      <span style="display:inline-flex;align-items:center;gap:6px;color:${COLORS[s.rule]};font-weight:700;width:74px">
+        <span style="color:${COLORS[s.rule]}">${ICONS_SM[s.rule]}</span>${s.rule}
+      </span>
+      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px;font-weight:700">${s.w}-${s.l}</span>
+      <span style="font-weight:700">${s.xpAfter.toLocaleString()}</span>
+      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:62px;text-align:right;font-weight:700">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
     </div>`).join("");
+
   el.innerHTML=`
     <div class="grid3s">
       <div class="stat"><div class="stat-lbl">総試合数</div><div class="stat-val">${total}</div></div>
       <div class="stat"><div class="stat-lbl">総勝率</div><div class="stat-val">${winRate}%</div></div>
       <div class="stat"><div class="stat-lbl">最高XP</div><div class="stat-val">${highestXp.toLocaleString()}</div></div>
     </div>
-    <div class="grid2" style="margin-bottom:20px">${ruleCards}</div>
-    <div class="chart-legend" id="chart-legend"></div>
+    <div class="grid2" style="margin-bottom:22px">${ruleCards}</div>
     <div class="filter-row">${filterBtns}</div>
-    <div class="chart-area"><canvas id="chart" height="260"></canvas></div>
+    <div class="chart-legend" id="chart-legend"></div>
+    <div class="chart-area"><canvas id="chart" height="240"></canvas></div>
     <div class="sec-lbl">全記録</div>
     <div class="records">${allRecords}</div>
   `;
   drawChart(sets);
 }
+
 function onSeasonChange(){viewSeason=document.getElementById("season-select").value;renderDash()}
 function setFilter(r){filterRule=r;renderDash()}
 
 function drawChart(sets){
   const canvas=document.getElementById("chart");if(!canvas)return;
-  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.clientWidth||320;
-  canvas.width=W*dpr;canvas.height=260*dpr;canvas.style.width=W+"px";canvas.style.height="260px";
+  const dpr=window.devicePixelRatio||1;
+  const W=canvas.parentElement.clientWidth-24||320;
+  canvas.width=W*dpr;canvas.height=240*dpr;canvas.style.width=W+"px";canvas.style.height="240px";
   const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);
   const showRules=filterRule==="ALL"?RULES:[filterRule];
-  const pad={top:16,right:16,bottom:40,left:58};
-  const cw=W-pad.left-pad.right,ch=260-pad.top-pad.bottom;
+  const pad={top:12,right:12,bottom:38,left:58};
+  const cw=W-pad.left-pad.right,ch=240-pad.top-pad.bottom;
   const ruleData={};
   showRules.forEach(r=>{
     const pts=[];let cnt=0;
-    sets.forEach((s,i)=>{if(s.rule===r){cnt++;pts.push({x:i,xpAfter:s.xpAfter,idx:cnt})}});
+    sets.forEach((s,i)=>{if(s.rule===r){cnt++;pts.push({x:i,xpAfter:s.xpAfter})}});
     if(pts.length)ruleData[r]=pts;
   });
   const allPts=Object.values(ruleData).flat();if(!allPts.length)return;
@@ -453,38 +529,47 @@ function drawChart(sets){
   const toX=i=>pad.left+(i/Math.max(totalSets-1,1))*cw;
   const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
   // グリッド
-  ctx.strokeStyle="rgba(255,255,255,0.07)";ctx.lineWidth=1;
+  ctx.strokeStyle="rgba(255,255,255,0.06)";ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
     const y=pad.top+(ch/4)*i;
     ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cw,y);ctx.stroke();
-    const val=Math.round(xpMax-(xpRange/4)*i);
-    ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="right";
-    ctx.fillText(val.toLocaleString(),pad.left-6,y+4);
+    ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="right";
+    ctx.fillText(Math.round(xpMax-(xpRange/4)*i).toLocaleString(),pad.left-6,y+4);
   }
   const step=Math.ceil(totalSets/8);
   for(let i=0;i<totalSets;i+=step){
-    ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="center";
+    ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="center";
     ctx.fillText(i+1,toX(i),pad.top+ch+18);
   }
-  ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="right";
-  ctx.fillText("セット数",pad.left+cw,pad.top+ch+36);
+  ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="right";
+  ctx.fillText("セット数",pad.left+cw,pad.top+ch+34);
   const DASHES=[[],[6,3],[2,4],[4,2,2,2]];
   showRules.forEach((r,ri)=>{
     const pts=ruleData[r];if(!pts||!pts.length)return;
+    // エリア下塗り
+    if(ri===0&&pts.length>1){
+      ctx.beginPath();
+      pts.forEach((p,i)=>{const x=toX(p.x),y=toY(p.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+      ctx.lineTo(toX(pts[pts.length-1].x),pad.top+ch);
+      ctx.lineTo(toX(pts[0].x),pad.top+ch);ctx.closePath();
+      ctx.fillStyle=`rgba(${hexToRgb(COLORS[r])},0.07)`;ctx.fill();
+    }
     ctx.setLineDash(DASHES[ri]||[]);
     ctx.strokeStyle=COLORS[r];ctx.lineWidth=2.5;ctx.beginPath();
     pts.forEach((p,i)=>{const x=toX(p.x),y=toY(p.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
     ctx.stroke();
     pts.forEach(p=>{
       const x=toX(p.x),y=toY(p.xpAfter);
-      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
+      ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);
       ctx.fillStyle=COLORS[r];ctx.fill();
+      ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);
+      ctx.fillStyle="#0a0e18";ctx.fill();
     });
     ctx.setLineDash([]);
   });
   const legEl=document.getElementById("chart-legend");
   if(legEl)legEl.innerHTML=showRules.filter(r=>ruleData[r]).map(r=>`
-    <span style="display:inline-flex;align-items:center;gap:4px;color:${COLORS[r]}">
+    <span style="display:inline-flex;align-items:center;gap:5px;color:${COLORS[r]};font-weight:600">
       <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
     </span>`).join("");
 }
