@@ -6,94 +6,213 @@
 <title>Xマッチ記録アプリ</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#f5f5f5;color:#111;min-height:100vh}
-#app{max-width:680px;margin:0 auto;padding:20px 16px 60px}
-h1{font-size:20px;font-weight:600;margin-bottom:20px}
-.tabs{display:flex;gap:8px;margin-bottom:20px}
-.tab{flex:1;padding:10px;border-radius:8px;border:1px solid #ddd;cursor:pointer;font-size:15px;background:#f0f0f0;color:#666}
-.tab.active{background:#ede9fe;color:#5b21b6;border-color:#c4b5fd;font-weight:500}
-.lbl{display:block;font-size:13px;color:#666;margin-bottom:8px}
-.section{margin-bottom:20px}
+:root{
+  --bg:#0d1117;
+  --bg2:#161b22;
+  --bg3:#1f2630;
+  --blue:#1EAEE4;
+  --blue-dim:#1485ad;
+  --yellow:#FFE000;
+  --yellow-dim:#c9b200;
+  --white:#f0f4f8;
+  --muted:#7a8a9a;
+  --border:#2a3440;
+  --green:#1de090;
+  --red:#ff4b6e;
+  --radius:10px;
+  --radius-lg:16px;
+}
+body{background:var(--bg);color:var(--white);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
+
+/* インク背景装飾 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 120px 80px at 8% 12%, rgba(30,174,228,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 90px 140px at 92% 6%, rgba(255,224,0,0.13) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 100px at 50% 98%, rgba(30,174,228,0.10) 0%, transparent 70%);
+}
+#app{max-width:680px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
+
+/* ヘッダー */
+.header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.ink-logo{width:36px;height:36px;position:relative;flex-shrink:0}
+.ink-logo svg{width:36px;height:36px}
+h1{font-size:22px;font-weight:700;letter-spacing:.03em;
+  background:linear-gradient(90deg,var(--blue),var(--yellow));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* タブ */
+.tabs{display:flex;gap:8px;margin-bottom:24px;background:var(--bg2);padding:5px;border-radius:var(--radius-lg);border:1px solid var(--border)}
+.tab{flex:1;padding:10px;border-radius:12px;border:none;cursor:pointer;font-size:15px;font-weight:500;background:transparent;color:var(--muted);transition:all .2s}
+.tab.active{background:var(--blue);color:#fff;box-shadow:0 2px 12px rgba(30,174,228,0.35)}
+
+/* セクション */
+.lbl{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;letter-spacing:.05em;text-transform:uppercase}
+.section{margin-bottom:22px}
+
+/* ルールボタン */
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .grid3s{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
-.rule-btn{padding:10px 4px;font-size:14px;border-radius:8px;cursor:pointer;border:1px solid #ddd;background:#f0f0f0;color:#333;transition:all .15s}
-.res-btn{padding:10px;font-size:15px;border-radius:8px;cursor:pointer;border:1px solid #ddd;background:#f0f0f0;transition:all .15s}
+
+.rule-btn{padding:11px 4px;font-size:14px;font-weight:600;border-radius:var(--radius);cursor:pointer;
+  border:2px solid var(--border);background:var(--bg2);color:var(--muted);transition:all .18s;letter-spacing:.02em}
+.rule-btn:hover{border-color:var(--blue);color:var(--white)}
+
+.res-btn{padding:11px;font-size:15px;font-weight:600;border-radius:var(--radius);cursor:pointer;
+  border:2px solid var(--border);background:var(--bg2);transition:all .18s}
+.res-btn:hover{border-color:var(--muted)}
+
+/* XP入力 */
 .xp-row{display:flex;align-items:center;gap:12px}
-input[type=number],select{padding:10px 12px;font-size:16px;border-radius:8px;border:1px solid #ddd;width:100%;background:#fff;color:#111}
-.submit-btn{width:100%;padding:14px;font-size:16px;font-weight:500;border-radius:8px;border:none;cursor:pointer;transition:opacity .2s}
-.row{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;margin-bottom:6px;background:#f0f0f0;border-radius:8px;font-size:14px}
-.stat{background:#f0f0f0;border-radius:8px;padding:12px;text-align:center}
-.stat-lbl{font-size:11px;color:#888;margin-bottom:4px}
-.stat-val{font-size:20px;font-weight:500}
-.card{background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:12px 16px}
+input[type=number],select{
+  padding:11px 14px;font-size:16px;border-radius:var(--radius);
+  border:2px solid var(--border);background:var(--bg2);color:var(--white);width:100%;
+  outline:none;transition:border-color .18s}
+input[type=number]:focus,select:focus{border-color:var(--blue)}
+.diff{font-size:22px;font-weight:700;min-width:72px;text-align:right}
+
+/* 送信ボタン */
+.submit-btn{width:100%;padding:15px;font-size:16px;font-weight:700;border-radius:var(--radius);
+  border:none;cursor:pointer;letter-spacing:.05em;transition:all .2s;
+  background:var(--bg2);color:var(--muted)}
+.submit-btn.ready{
+  background:linear-gradient(90deg,var(--blue),#0d8fc4);
+  color:#fff;box-shadow:0 4px 18px rgba(30,174,228,0.4)}
+.submit-btn.ready:active{transform:scale(0.98)}
+
+/* 記録行 */
+.row{display:flex;align-items:center;justify-content:space-between;
+  padding:10px 14px;margin-bottom:6px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);font-size:14px;
+  transition:border-color .15s}
+.row:hover{border-color:var(--blue-dim)}
+
+/* スタットカード */
+.stat{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center}
+.stat-lbl{font-size:11px;color:var(--muted);margin-bottom:6px;letter-spacing:.05em;text-transform:uppercase}
+.stat-val{font-size:22px;font-weight:700;color:var(--yellow)}
+
+/* ルール別カード */
+.rule-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 18px;transition:border-color .15s}
+.rule-card:hover{border-color:var(--blue-dim)}
+
+/* フィルターボタン */
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-.filter-btn{padding:5px 12px;font-size:13px;border-radius:8px;cursor:pointer;border:1px solid #ddd;background:#f0f0f0;color:#555}
-.records{max-height:240px;overflow-y:auto;margin-top:8px}
-.mental{background:#fff8e1;border:1px solid #ffe082;border-radius:10px;padding:12px 16px;margin-bottom:16px;color:#856404;font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
-.close-btn{font-size:12px;padding:3px 8px;border-radius:6px;border:1px solid #ffe082;background:transparent;cursor:pointer;color:#856404;white-space:nowrap}
-.archive-btn{font-size:13px;color:#888;padding:6px 12px;border-radius:8px;border:1px solid #ddd;background:transparent;cursor:pointer;margin-top:16px}
-.sep{border-top:1px solid #e5e5e5;padding-top:16px;margin-top:16px}
-.sec-lbl{font-size:13px;color:#888;margin-bottom:10px}
-.diff{font-size:20px;font-weight:500;min-width:70px;text-align:right}
-.empty{color:#888;text-align:center;padding:40px 0;font-size:15px}
-.hidden{display:none}
-.overlay{position:fixed;inset:0;z-index:9999;background:rgba(124,58,237,0.93);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeInOut 3.5s ease forwards;pointer-events:none}
-.overlay-title{font-size:44px;font-weight:700;color:#fff;text-align:center;line-height:1.3;animation:pulse 0.8s infinite}
-.overlay-emoji{font-size:40px;margin-top:16px}
-.overlay-sub{color:rgba(255,255,255,.85);font-size:18px;margin-top:12px}
-@keyframes fadeInOut{0%{opacity:0}10%{opacity:1}80%{opacity:1}100%{opacity:0}}
-@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
-/* チャート */
-.chart-area{width:100%;overflow-x:auto;margin-bottom:20px}
-canvas#chart{display:block}
-.chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#666;margin-bottom:8px}
+.filter-btn{padding:6px 14px;font-size:13px;font-weight:600;border-radius:20px;cursor:pointer;
+  border:1px solid var(--border);background:var(--bg2);color:var(--muted);transition:all .15s}
+.filter-btn:hover{border-color:var(--muted);color:var(--white)}
+
+/* グラフ */
+.chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:8px}
 .legend-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
-@media(prefers-color-scheme:dark){
-  body{background:#1a1a1a;color:#f0f0f0}
-  .rule-btn,.res-btn,.filter-btn,.row,.stat{background:#2a2a2a;color:#ccc;border-color:#3a3a3a}
-  .tab{background:#2a2a2a;color:#aaa;border-color:#3a3a3a}
-  .card{background:#2a2a2a;border-color:#3a3a3a}
-  input[type=number],select{background:#2a2a2a;color:#f0f0f0;border-color:#444}
-}
+.chart-area{width:100%;overflow-x:auto;margin-bottom:20px}
+
+/* 全記録 */
+.records{max-height:240px;overflow-y:auto}
+
+/* メンタルケア */
+.mental{background:rgba(255,224,0,0.08);border:1px solid rgba(255,224,0,0.3);
+  border-radius:var(--radius);padding:12px 16px;margin-bottom:16px;
+  color:var(--yellow);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.close-btn{font-size:12px;padding:4px 10px;border-radius:6px;
+  border:1px solid rgba(255,224,0,0.4);background:transparent;cursor:pointer;color:var(--yellow);white-space:nowrap}
+
+/* アーカイブ */
+.sep{border-top:1px solid var(--border);padding-top:16px;margin-top:20px}
+.archive-btn{font-size:13px;color:var(--muted);padding:8px 14px;border-radius:var(--radius);
+  border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s}
+.archive-btn:hover{color:var(--white);border-color:var(--muted)}
+
+/* 最高XP演出 */
+.overlay{position:fixed;inset:0;z-index:9999;
+  background:rgba(13,17,23,0.96);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  animation:fadeInOut 3.5s ease forwards;pointer-events:none}
+.overlay-ring{
+  width:220px;height:220px;border-radius:50%;
+  border:4px solid var(--yellow);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  animation:ringPulse 0.7s infinite alternate;
+  box-shadow:0 0 40px rgba(255,224,0,0.4),inset 0 0 40px rgba(255,224,0,0.08)}
+.overlay-title{font-size:26px;font-weight:700;color:var(--yellow);text-align:center;line-height:1.4;letter-spacing:.04em}
+.overlay-emoji{font-size:36px;margin-top:4px}
+.overlay-sub{color:rgba(255,255,255,.7);font-size:15px;margin-top:20px;letter-spacing:.03em}
+@keyframes fadeInOut{0%{opacity:0}8%{opacity:1}80%{opacity:1}100%{opacity:0}}
+@keyframes ringPulse{0%{transform:scale(1);box-shadow:0 0 30px rgba(255,224,0,0.3)}100%{transform:scale(1.04);box-shadow:0 0 60px rgba(255,224,0,0.6)}}
+
+/* シーズン表示 */
+.season-tag{display:inline-block;background:rgba(30,174,228,0.12);border:1px solid rgba(30,174,228,0.3);
+  border-radius:20px;padding:4px 12px;font-size:13px;color:var(--blue);margin-bottom:18px}
+
+/* その他 */
+.hidden{display:none}
+.empty{color:var(--muted);text-align:center;padding:48px 0;font-size:15px}
+.sec-lbl{font-size:12px;color:var(--muted);margin-bottom:10px;letter-spacing:.05em;text-transform:uppercase}
+
+/* インクスプラット装飾SVG */
+.splat{position:fixed;pointer-events:none;opacity:0.07;z-index:0}
 </style>
 </head>
 <body>
+
+<!-- インク装飾 -->
+<svg class="splat" style="top:-30px;right:-20px;width:180px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#1EAEE4" d="M100,20 C130,10 160,40 170,70 C185,110 160,150 130,165 C100,180 60,170 40,145 C15,115 20,70 45,45 C60,28 78,27 100,20Z"/>
+  <circle fill="#1EAEE4" cx="155" cy="40" r="18"/>
+  <circle fill="#1EAEE4" cx="175" cy="75" r="10"/>
+  <circle fill="#1EAEE4" cx="140" cy="20" r="12"/>
+</svg>
+<svg class="splat" style="bottom:-20px;left:-10px;width:140px" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path fill="#FFE000" d="M90,30 C120,15 155,45 165,80 C178,122 155,158 120,168 C85,178 48,162 30,132 C8,96 18,54 48,35 C62,24 72,40 90,30Z"/>
+  <circle fill="#FFE000" cx="50" cy="160" r="14"/>
+  <circle fill="#FFE000" cx="25" cy="130" r="8"/>
+</svg>
+
 <div id="app">
-  <h1>Xマッチ 記録アプリ</h1>
+  <div class="header">
+    <div class="ink-logo">
+      <svg viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#1EAEE4" d="M18,4 C24,4 30,9 31,16 C32,22 28,28 22,31 C18,33 14,33 10,30 C5,26 4,19 7,13 C10,7 14,4 18,4Z"/>
+        <path fill="#FFE000" d="M18,10 C21,10 24,13 24,17 C24,21 21,24 18,24 C15,24 12,21 12,17 C12,13 15,10 18,10Z"/>
+        <rect fill="#0d1117" x="16" y="24" width="4" height="8" rx="2"/>
+      </svg>
+    </div>
+    <h1>Xマッチ 記録アプリ</h1>
+  </div>
+
   <div class="tabs">
     <button class="tab active" id="tab-record" onclick="switchTab('record')">記録する</button>
     <button class="tab" id="tab-dash" onclick="switchTab('dash')">振り返り</button>
   </div>
 
-  <!-- メンタルケア -->
   <div class="mental hidden" id="mental-msg">
-    ☕ 直近3セット連続マイナスです。一度休憩して、散歩（ステージ確認）かメモを見直そう！
+    ☕ 直近3セット連続マイナス。一度休憩して、ステージ確認かメモを見直そう！
     <button class="close-btn" onclick="document.getElementById('mental-msg').classList.add('hidden')">閉じる</button>
   </div>
 
-  <!-- 最高XP演出 -->
   <div class="overlay hidden" id="highest-overlay">
-    <div class="overlay-title">HIGHEST XP<br>UPDATED!</div>
-    <div class="overlay-emoji">🎉</div>
+    <div class="overlay-ring">
+      <div class="overlay-title">HIGHEST XP<br>UPDATED!</div>
+      <div class="overlay-emoji">🎉</div>
+    </div>
     <div class="overlay-sub">シーズン最高XP更新おめでとう！</div>
   </div>
 
   <!-- 記録タブ -->
   <div id="pane-record">
-    <p style="font-size:13px;color:#888;margin-bottom:16px">シーズン: <strong id="season-label"></strong></p>
+    <div class="season-tag" id="season-label-tag"></div>
 
     <div class="section">
       <label class="lbl">ルール</label>
       <div class="grid4" id="rule-btns"></div>
     </div>
-
     <div class="section">
       <label class="lbl">戦績</label>
       <div class="grid3" id="result-btns"></div>
     </div>
-
     <div class="section">
       <label class="lbl" id="xp-label">セット終了後のXP</label>
       <div class="xp-row">
@@ -102,7 +221,7 @@ canvas#chart{display:block}
       </div>
     </div>
 
-    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()" style="background:#e5e5e5;color:#aaa" disabled>記録する</button>
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()" disabled>記録する</button>
 
     <div id="recent-list" style="margin-top:24px"></div>
 
@@ -113,8 +232,8 @@ canvas#chart{display:block}
 
   <!-- 振り返りタブ -->
   <div id="pane-dash" class="hidden">
-    <div style="margin-bottom:16px">
-      <label class="lbl" style="display:inline;margin-right:8px">シーズン:</label>
+    <div style="margin-bottom:16px;display:flex;align-items:center;gap:10px">
+      <label class="lbl" style="margin:0;white-space:nowrap">シーズン</label>
       <select id="season-select" onchange="onSeasonChange()"></select>
     </div>
     <div id="dash-content"></div>
@@ -122,141 +241,108 @@ canvas#chart{display:block}
 </div>
 
 <script>
-const RULES = ["エリア","ヤグラ","ホコ","アサリ"];
-const RESULTS = [
+const RULES=["エリア","ヤグラ","ホコ","アサリ"];
+const RESULTS=[
   {label:"3-0",w:3,l:0},{label:"3-1",w:3,l:1},{label:"3-2",w:3,l:2},
   {label:"2-3",w:2,l:3},{label:"1-3",w:1,l:3},{label:"0-3",w:0,l:3}
 ];
-const COLORS = {エリア:"#7c3aed",ヤグラ:"#0ea5e9",ホコ:"#f59e0b",アサリ:"#10b981"};
+const COLORS={エリア:"#1EAEE4",ヤグラ:"#FFE000",ホコ:"#ff6b35",アサリ:"#1de090"};
 
-let selectedRule = null, selectedResult = null;
-let seasons = {}, currentSeason = "", flashTimer = null, chartInstance = null;
+let selectedRule=null,selectedResult=null;
+let seasons={},currentSeason="",flashTimer=null,viewSeason="",filterRule="ALL";
 
-function getCurrentSeasonId(){
-  const n=new Date(), s=Math.floor(n.getMonth()/3);
-  return `${n.getFullYear()}-S${s+1}`;
-}
+function getCurrentSeasonId(){const n=new Date(),s=Math.floor(n.getMonth()/3);return `${n.getFullYear()}-S${s+1}`}
 function getSeasonLabel(id){
   const [y,s]=id.split("-S");
-  const starts=["1月","4月","7月","10月"], ends=["3月","6月","9月","12月"];
+  const starts=["1月","4月","7月","10月"],ends=["3月","6月","9月","12月"];
   const i=parseInt(s)-1;
-  if(isNaN(i)||i<0||i>3) return id;
+  if(isNaN(i)||i<0||i>3)return id;
   return `${y}年 ${starts[i]}〜${ends[i]}`;
 }
-function load(){
-  try{const v=localStorage.getItem("xmatch_seasons");return v?JSON.parse(v):{}}catch{return{}}
-}
-function save(){
-  try{localStorage.setItem("xmatch_seasons",JSON.stringify(seasons))}catch{}
-}
-function getSets(sid){ return seasons[sid]||[] }
+function load(){try{const v=localStorage.getItem("xmatch_seasons");return v?JSON.parse(v):{}}catch{return{}}}
+function save(){try{localStorage.setItem("xmatch_seasons",JSON.stringify(seasons))}catch{}}
+function getSets(sid){return seasons[sid]||[]}
 
 function init(){
-  seasons=load();
-  currentSeason=getCurrentSeasonId();
-  if(!seasons[currentSeason]) seasons[currentSeason]=[];
-  renderRuleBtns();
-  renderResultBtns();
-  document.getElementById("season-label").textContent=getSeasonLabel(currentSeason);
+  seasons=load();currentSeason=getCurrentSeasonId();
+  if(!seasons[currentSeason])seasons[currentSeason]=[];
+  viewSeason=currentSeason;
+  renderRuleBtns();renderResultBtns();
+  document.getElementById("season-label-tag").textContent="シーズン: "+getSeasonLabel(currentSeason);
   renderRecent();
-  renderDash();
 }
 
 function renderRuleBtns(){
-  const el=document.getElementById("rule-btns");
-  el.innerHTML=RULES.map(r=>`
-    <button class="rule-btn" id="rule-${r}" onclick="selectRule('${r}')"
-      style="${selectedRule===r?`background:${COLORS[r]};color:#fff;border-color:${COLORS[r]};font-weight:500`:""}">${r}</button>
+  document.getElementById("rule-btns").innerHTML=RULES.map(r=>`
+    <button class="rule-btn" onclick="selectRule('${r}')"
+      style="${selectedRule===r?`border-color:${COLORS[r]};color:${COLORS[r]};background:rgba(${hexToRgb(COLORS[r])},0.12)`:""}">${r}</button>
   `).join("");
 }
 function renderResultBtns(){
-  const el=document.getElementById("result-btns");
-  el.innerHTML=RESULTS.map(res=>{
-    const win=res.w>res.l;
-    const sel=selectedResult?.label===res.label;
-    const style=sel
-      ?`background:${win?"#10b981":"#ef4444"};color:#fff;border-color:${win?"#10b981":"#ef4444"};font-weight:500`
-      :`color:${win?"#059669":"#dc2626"}`;
-    return `<button class="res-btn" onclick="selectResult('${res.label}')" style="${style}">${res.label}</button>`;
+  document.getElementById("result-btns").innerHTML=RESULTS.map(res=>{
+    const win=res.w>res.l,sel=selectedResult?.label===res.label;
+    const selStyle=sel?(win
+      ?`border-color:var(--green);color:var(--green);background:rgba(29,224,144,0.12)`
+      :`border-color:var(--red);color:var(--red);background:rgba(255,75,110,0.12)`):"";
+    const defColor=win?"color:var(--green)":"color:var(--red)";
+    return `<button class="res-btn" onclick="selectResult('${res.label}')" style="${sel?selStyle:defColor}">${res.label}</button>`;
   }).join("");
 }
 
-function selectRule(r){
-  selectedRule=r;
-  renderRuleBtns();
-  updateXpLabel();
-  onXpInput();
-  checkSubmit();
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
 }
-function selectResult(label){
-  selectedResult=RESULTS.find(r=>r.label===label);
-  renderResultBtns();
-  checkSubmit();
-}
+function selectRule(r){selectedRule=r;renderRuleBtns();updateXpLabel();onXpInput();checkSubmit()}
+function selectResult(label){selectedResult=RESULTS.find(r=>r.label===label);renderResultBtns();checkSubmit()}
 
 function lastXpForRule(r){
   const sets=getSets(currentSeason);
-  for(let i=sets.length-1;i>=0;i--){ if(sets[i].rule===r) return sets[i].xpAfter; }
+  for(let i=sets.length-1;i>=0;i--)if(sets[i].rule===r)return sets[i].xpAfter;
   return null;
 }
 function updateXpLabel(){
-  const lbl=document.getElementById("xp-label");
   const prev=selectedRule?lastXpForRule(selectedRule):null;
-  lbl.textContent="セット終了後のXP"+(prev!==null?` （前回: ${prev}）`:"");
-}
+  document.getElementById("xp-label").textContent="セット終了後のXP"+(prev!==null?` (前回: ${prev})`:"")}
 function onXpInput(){
   const xp=parseInt(document.getElementById("xp-input").value);
   const prev=selectedRule?lastXpForRule(selectedRule):null;
-  const diffEl=document.getElementById("xp-diff");
+  const el=document.getElementById("xp-diff");
   if(!isNaN(xp)&&prev!==null){
     const d=xp-prev;
-    diffEl.textContent=(d>=0?"+":"")+d;
-    diffEl.style.color=d>=0?"#10b981":"#ef4444";
-    diffEl.classList.remove("hidden");
-  } else {
-    diffEl.classList.add("hidden");
-  }
+    el.textContent=(d>=0?"+":"")+d;
+    el.style.color=d>=0?"var(--green)":"var(--red)";
+    el.classList.remove("hidden");
+  }else el.classList.add("hidden");
   checkSubmit();
 }
 function checkSubmit(){
-  const xp=document.getElementById("xp-input").value;
-  const ok=selectedRule&&selectedResult&&xp!=="";
+  const ok=selectedRule&&selectedResult&&document.getElementById("xp-input").value!=="";
   const btn=document.getElementById("submit-btn");
   btn.disabled=!ok;
-  btn.style.background=ok?"#7c3aed":"#e5e5e5";
-  btn.style.color=ok?"#fff":"#aaa";
+  btn.className="submit-btn"+(ok?" ready":"");
 }
 
 function handleSubmit(){
   const xpVal=parseInt(document.getElementById("xp-input").value);
-  if(!selectedRule||!selectedResult||isNaN(xpVal)) return;
+  if(!selectedRule||!selectedResult||isNaN(xpVal))return;
   const prev=lastXpForRule(selectedRule);
   const sets=getSets(currentSeason);
   const prevHighest=Math.max(...sets.filter(s=>s.rule===selectedRule).map(s=>s.xpAfter),-Infinity);
   const isHighest=xpVal>prevHighest&&sets.some(s=>s.rule===selectedRule);
-  const entry={rule:selectedRule,w:selectedResult.w,l:selectedResult.l,xpAfter:xpVal,xpDiff:prev!==null?xpVal-prev:null,ts:Date.now()};
-  seasons[currentSeason].push(entry);
+  seasons[currentSeason].push({rule:selectedRule,w:selectedResult.w,l:selectedResult.l,xpAfter:xpVal,xpDiff:prev!==null?xpVal-prev:null,ts:Date.now()});
   save();
-
-  // メンタルケア判定
-  const all=getSets(currentSeason);
-  const recent=all.slice(-3);
-  if(recent.length===3&&recent.every(s=>(s.xpDiff??0)<0)){
-    document.getElementById("mental-msg").classList.remove("hidden");
-  }
-
-  // 最高XP演出
+  const all=getSets(currentSeason),recent=all.slice(-3);
+  if(recent.length===3&&recent.every(s=>(s.xpDiff??0)<0))document.getElementById("mental-msg").classList.remove("hidden");
   if(isHighest){
-    const ov=document.getElementById("highest-overlay");
-    ov.classList.remove("hidden");
-    if(flashTimer) clearTimeout(flashTimer);
+    const ov=document.getElementById("highest-overlay");ov.classList.remove("hidden");
+    if(flashTimer)clearTimeout(flashTimer);
     flashTimer=setTimeout(()=>ov.classList.add("hidden"),3500);
   }
-
-  selectedRule=null; selectedResult=null;
+  selectedRule=null;selectedResult=null;
   document.getElementById("xp-input").value="";
   document.getElementById("xp-diff").classList.add("hidden");
-  renderRuleBtns(); renderResultBtns(); updateXpLabel(); checkSubmit();
+  renderRuleBtns();renderResultBtns();updateXpLabel();checkSubmit();
   const btn=document.getElementById("submit-btn");
   btn.textContent="保存しました ✓";
   setTimeout(()=>btn.textContent="記録する",1500);
@@ -267,26 +353,22 @@ function renderRecent(){
   const sets=getSets(currentSeason);
   const el=document.getElementById("recent-list");
   if(!sets.length){el.innerHTML="";return}
-  const recent=[...sets].reverse().slice(0,5);
-  el.innerHTML=`<div class="sec-lbl">直近の記録</div>`+recent.map(s=>`
+  el.innerHTML=`<div class="sec-lbl">直近の記録</div>`+[...sets].reverse().slice(0,5).map(s=>`
     <div class="row">
-      <span style="color:${COLORS[s.rule]};font-weight:500;width:48px">${s.rule}</span>
-      <span style="color:${s.w>s.l?"#059669":"#dc2626"};width:40px">${s.w}-${s.l}</span>
-      <span style="font-weight:500">${s.xpAfter.toLocaleString()}</span>
-      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"#10b981":"#ef4444"};width:56px;text-align:right">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
-    </div>
-  `).join("");
+      <span style="color:${COLORS[s.rule]};font-weight:600;width:52px">${s.rule}</span>
+      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px">${s.w}-${s.l}</span>
+      <span style="font-weight:600">${s.xpAfter.toLocaleString()}</span>
+      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:58px;text-align:right;font-weight:600">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
+    </div>`).join("");
 }
 
 function handleNewSeason(){
-  if(!confirm(`現在のシーズン (${getSeasonLabel(currentSeason)}) をアーカイブして新しいシーズンを開始しますか？`)) return;
+  if(!confirm(`現在のシーズン (${getSeasonLabel(currentSeason)}) をアーカイブして新しいシーズンを開始しますか？`))return;
   const newId=getCurrentSeasonId()+`-${Date.now()}`;
-  currentSeason=newId;
-  if(!seasons[currentSeason]) seasons[currentSeason]=[];
-  save();
-  document.getElementById("season-label").textContent=getSeasonLabel(currentSeason);
-  renderRecent();
-  renderDash();
+  currentSeason=newId;seasons[currentSeason]=[];save();
+  viewSeason=currentSeason;
+  document.getElementById("season-label-tag").textContent="シーズン: "+getSeasonLabel(currentSeason);
+  renderRecent();renderDash();
 }
 
 function switchTab(t){
@@ -294,62 +376,48 @@ function switchTab(t){
   document.getElementById("pane-dash").classList.toggle("hidden",t!=="dash");
   document.getElementById("tab-record").classList.toggle("active",t==="record");
   document.getElementById("tab-dash").classList.toggle("active",t==="dash");
-  if(t==="dash") renderDash();
+  if(t==="dash")renderDash();
 }
-
-let viewSeason="", filterRule="ALL";
 
 function renderDash(){
   const allIds=[...new Set([...Object.keys(seasons),currentSeason])].sort().reverse();
-  if(!viewSeason||!allIds.includes(viewSeason)) viewSeason=currentSeason;
-
-  // セレクト
+  if(!viewSeason||!allIds.includes(viewSeason))viewSeason=currentSeason;
   const sel=document.getElementById("season-select");
   sel.innerHTML=allIds.map(id=>`<option value="${id}"${id===viewSeason?" selected":""}>${getSeasonLabel(id)}${id===currentSeason?" (現在)":""}</option>`).join("");
-
   const sets=getSets(viewSeason);
   const el=document.getElementById("dash-content");
-  if(!sets.length){el.innerHTML=`<div class="empty">まだ記録がありません。記録タブから入力してください。</div>`;return}
-
-  const totalW=sets.reduce((a,s)=>a+s.w,0);
-  const totalL=sets.reduce((a,s)=>a+s.l,0);
-  const total=totalW+totalL;
+  if(!sets.length){el.innerHTML=`<div class="empty">まだ記録がありません。<br>記録タブから入力してください。</div>`;return}
+  const totalW=sets.reduce((a,s)=>a+s.w,0),totalL=sets.reduce((a,s)=>a+s.l,0),total=totalW+totalL;
   const winRate=total>0?Math.round(totalW/total*100):0;
   const highestXp=Math.max(...sets.map(s=>s.xpAfter));
   const latestXp={},startXp={};
   [...sets].reverse().forEach(s=>{if(!latestXp[s.rule])latestXp[s.rule]=s.xpAfter});
   sets.forEach(s=>{if(!startXp[s.rule])startXp[s.rule]=s.xpAfter});
-
   const ruleCards=RULES.map(r=>{
-    const curr=latestXp[r];
-    if(!curr) return "";
+    const curr=latestXp[r];if(!curr)return"";
     const d2=startXp[r]!==undefined?curr-startXp[r]:null;
-    return `<div class="card">
-      <div style="font-size:12px;color:${COLORS[r]};font-weight:500;margin-bottom:4px">${r}</div>
-      <div style="font-size:22px;font-weight:500">${curr.toLocaleString()}</div>
-      ${d2!==null?`<div style="font-size:12px;color:${d2>=0?"#10b981":"#ef4444"};margin-top:2px">開始比 ${d2>=0?"+":""}${d2}</div>`:""}
+    return `<div class="rule-card">
+      <div style="font-size:12px;color:${COLORS[r]};font-weight:700;margin-bottom:6px;letter-spacing:.04em">${r}</div>
+      <div style="font-size:24px;font-weight:700;color:var(--white)">${curr.toLocaleString()}</div>
+      ${d2!==null?`<div style="font-size:13px;color:${d2>=0?"var(--green)":"var(--red)"};margin-top:4px;font-weight:600">開始比 ${d2>=0?"+":""}${d2}</div>`:""}
     </div>`;
   }).join("");
-
   const filterBtns=["ALL",...RULES].map(r=>`
     <button class="filter-btn" onclick="setFilter('${r}')"
-      style="${filterRule===r?`background:${r==="ALL"?"#7c3aed":COLORS[r]};color:#fff;border:none`:""}">${r}</button>
+      style="${filterRule===r?`background:${r==="ALL"?"var(--blue)":COLORS[r]};color:${r==="ヤグラ"?"#111":"#fff"};border-color:transparent`:""}">${r}</button>
   `).join("");
-
   const allRecords=[...sets].reverse().map(s=>`
     <div class="row">
-      <span style="color:${COLORS[s.rule]};font-weight:500;width:48px">${s.rule}</span>
-      <span style="color:${s.w>s.l?"#059669":"#dc2626"};width:36px">${s.w}-${s.l}</span>
-      <span style="font-weight:500">${s.xpAfter.toLocaleString()}</span>
-      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"#10b981":"#ef4444"};width:52px;text-align:right">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
-    </div>
-  `).join("");
-
+      <span style="color:${COLORS[s.rule]};font-weight:600;width:52px">${s.rule}</span>
+      <span style="color:${s.w>s.l?"var(--green)":"var(--red)"};width:40px">${s.w}-${s.l}</span>
+      <span style="font-weight:600">${s.xpAfter.toLocaleString()}</span>
+      ${s.xpDiff!==null?`<span style="color:${s.xpDiff>=0?"var(--green)":"var(--red)"};width:58px;text-align:right;font-weight:600">${s.xpDiff>=0?"+":""}${s.xpDiff}</span>`:""}
+    </div>`).join("");
   el.innerHTML=`
     <div class="grid3s">
-      <div class="stat"><div class="stat-lbl">トータルセット</div><div class="stat-val">${total}セット</div></div>
+      <div class="stat"><div class="stat-lbl">総試合数</div><div class="stat-val">${total}</div></div>
       <div class="stat"><div class="stat-lbl">総勝率</div><div class="stat-val">${winRate}%</div></div>
-      <div class="stat"><div class="stat-lbl">シーズン最高XP</div><div class="stat-val">${highestXp.toLocaleString()}</div></div>
+      <div class="stat"><div class="stat-lbl">最高XP</div><div class="stat-val">${highestXp.toLocaleString()}</div></div>
     </div>
     <div class="grid2" style="margin-bottom:20px">${ruleCards}</div>
     <div class="chart-legend" id="chart-legend"></div>
@@ -358,110 +426,69 @@ function renderDash(){
     <div class="sec-lbl">全記録</div>
     <div class="records">${allRecords}</div>
   `;
-
   drawChart(sets);
 }
-
-function onSeasonChange(){
-  viewSeason=document.getElementById("season-select").value;
-  renderDash();
-}
-function setFilter(r){
-  filterRule=r;
-  renderDash();
-}
+function onSeasonChange(){viewSeason=document.getElementById("season-select").value;renderDash()}
+function setFilter(r){filterRule=r;renderDash()}
 
 function drawChart(sets){
-  const canvas=document.getElementById("chart");
-  if(!canvas) return;
-  const dpr=window.devicePixelRatio||1;
-  const W=canvas.parentElement.clientWidth||320;
-  canvas.width=W*dpr; canvas.height=260*dpr;
-  canvas.style.width=W+"px"; canvas.style.height="260px";
-  const ctx=canvas.getContext("2d");
-  ctx.scale(dpr,dpr);
-
+  const canvas=document.getElementById("chart");if(!canvas)return;
+  const dpr=window.devicePixelRatio||1,W=canvas.parentElement.clientWidth||320;
+  canvas.width=W*dpr;canvas.height=260*dpr;canvas.style.width=W+"px";canvas.style.height="260px";
+  const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);
   const showRules=filterRule==="ALL"?RULES:[filterRule];
-  const pad={top:16,right:16,bottom:40,left:52};
-  const cw=W-pad.left-pad.right, ch=260-pad.top-pad.bottom;
-
-  // データ準備
+  const pad={top:16,right:16,bottom:40,left:58};
+  const cw=W-pad.left-pad.right,ch=260-pad.top-pad.bottom;
   const ruleData={};
   showRules.forEach(r=>{
-    const pts=[];
-    let cnt=0;
+    const pts=[];let cnt=0;
     sets.forEach((s,i)=>{if(s.rule===r){cnt++;pts.push({x:i,xpAfter:s.xpAfter,idx:cnt})}});
-    if(pts.length) ruleData[r]=pts;
+    if(pts.length)ruleData[r]=pts;
   });
-
-  const allPts=Object.values(ruleData).flat();
-  if(!allPts.length) return;
+  const allPts=Object.values(ruleData).flat();if(!allPts.length)return;
   const xpMin=Math.min(...allPts.map(p=>p.xpAfter));
   const xpMax=Math.max(...allPts.map(p=>p.xpAfter));
   const xpRange=xpMax-xpMin||100;
   const totalSets=sets.length;
-
-  const toCanvasX=i=>pad.left+(i/(Math.max(totalSets-1,1)))*cw;
-  const toCanvasY=v=>pad.top+ch-(((v-xpMin)/xpRange)*ch);
-
-  // グリッド・軸
-  ctx.strokeStyle="rgba(128,128,128,0.15)";
-  ctx.lineWidth=1;
-  const ySteps=4;
-  for(let i=0;i<=ySteps;i++){
-    const y=pad.top+(ch/ySteps)*i;
+  const toX=i=>pad.left+(i/Math.max(totalSets-1,1))*cw;
+  const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
+  // グリッド
+  ctx.strokeStyle="rgba(255,255,255,0.07)";ctx.lineWidth=1;
+  for(let i=0;i<=4;i++){
+    const y=pad.top+(ch/4)*i;
     ctx.beginPath();ctx.moveTo(pad.left,y);ctx.lineTo(pad.left+cw,y);ctx.stroke();
-    const val=Math.round(xpMax-(xpRange/ySteps)*i);
-    ctx.fillStyle="#888";ctx.font="11px sans-serif";ctx.textAlign="right";
+    const val=Math.round(xpMax-(xpRange/4)*i);
+    ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="right";
     ctx.fillText(val.toLocaleString(),pad.left-6,y+4);
   }
-  // X軸ラベル（最大8本）
   const step=Math.ceil(totalSets/8);
   for(let i=0;i<totalSets;i+=step){
-    const x=toCanvasX(i);
-    ctx.fillStyle="#888";ctx.font="11px sans-serif";ctx.textAlign="center";
-    ctx.fillText(i+1,x,pad.top+ch+18);
+    ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="center";
+    ctx.fillText(i+1,toX(i),pad.top+ch+18);
   }
-  ctx.fillStyle="#666";ctx.font="11px sans-serif";ctx.textAlign="right";
+  ctx.fillStyle="#7a8a9a";ctx.font="11px sans-serif";ctx.textAlign="right";
   ctx.fillText("セット数",pad.left+cw,pad.top+ch+36);
-
-  // 折れ線
   const DASHES=[[],[6,3],[2,4],[4,2,2,2]];
   showRules.forEach((r,ri)=>{
-    const pts=ruleData[r];
-    if(!pts||pts.length<1) return;
+    const pts=ruleData[r];if(!pts||!pts.length)return;
     ctx.setLineDash(DASHES[ri]||[]);
-    ctx.strokeStyle=COLORS[r];ctx.lineWidth=2;ctx.beginPath();
-    pts.forEach((p,i)=>{
-      const x=toCanvasX(p.x),y=toCanvasY(p.xpAfter);
-      i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
-    });
+    ctx.strokeStyle=COLORS[r];ctx.lineWidth=2.5;ctx.beginPath();
+    pts.forEach((p,i)=>{const x=toX(p.x),y=toY(p.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
     ctx.stroke();
-    // 点
     pts.forEach(p=>{
-      const x=toCanvasX(p.x),y=toCanvasY(p.xpAfter);
-      ctx.beginPath();ctx.arc(x,y,3.5,0,Math.PI*2);
+      const x=toX(p.x),y=toY(p.xpAfter);
+      ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
       ctx.fillStyle=COLORS[r];ctx.fill();
     });
     ctx.setLineDash([]);
   });
-
-  // 凡例
   const legEl=document.getElementById("chart-legend");
-  if(legEl){
-    legEl.innerHTML=showRules.filter(r=>ruleData[r]).map((r,ri)=>`
-      <span style="display:inline-flex;align-items:center;gap:4px">
-        <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
-      </span>
-    `).join("");
-  }
+  if(legEl)legEl.innerHTML=showRules.filter(r=>ruleData[r]).map(r=>`
+    <span style="display:inline-flex;align-items:center;gap:4px;color:${COLORS[r]}">
+      <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
+    </span>`).join("");
 }
-
-window.addEventListener("resize",()=>{
-  const sets=getSets(viewSeason||currentSeason);
-  if(sets.length&&document.getElementById("chart")) drawChart(sets);
-});
-
+window.addEventListener("resize",()=>{const s=getSets(viewSeason||currentSeason);if(s.length&&document.getElementById("chart"))drawChart(s)});
 init();
 </script>
 </body>
