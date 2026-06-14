@@ -616,7 +616,7 @@ function drawChart(sets){
     ctx.setLineDash([]);
   });
   const legEl=document.getElementById("chart-legend");
-  if(legEl)legEl.innerHTML=showRules.filter(r=>ruleData[r]).map(r=>`
+  if(legEl&&!singleRule)legEl.innerHTML=showRules.filter(r=>ruleData[r]).map(r=>`
     <span style="display:inline-flex;align-items:center;gap:5px;color:${COLORS[r]};font-weight:600">
       <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
     </span>`).join("");
