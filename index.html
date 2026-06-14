@@ -569,16 +569,11 @@ function drawChart(sets){
   const cw=W-pad.left-pad.right,ch=240-pad.top-pad.bottom;
   const ruleData={};
   showRules.forEach(r=>{
-    const pts=[];let cnt=0;
-    sets.forEach((s,i)=>{if(s.rule===r){cnt++;pts.push({x:i,xpAfter:s.xpAfter})}});
-    if(pts.length)ruleData[r]=pts;
+    const pts=sets.filter(s=>s.rule===r).map((s,i)=>({x:i,xpAfter:s.xpAfter}));
+    if(pts.length) ruleData[r]=pts;
   });
-  const allPts=Object.values(ruleData).flat();if(!allPts.length)return;
-  const xpMin=Math.min(...allPts.map(p=>p.xpAfter));
-  const xpMax=Math.max(...allPts.map(p=>p.xpAfter));
-  const xpRange=xpMax-xpMin||100;
-  const totalSets=sets.length;
-  const toX=i=>pad.left+(i/Math.max(totalSets-1,1))*cw;
+  const totalSets=Math.max(...Object.values(ruleData).map(p=>p.length),1);
+  const toX=i=>pad.left+(totalSets<=1?cw/2:(i/Math.max(totalSets-1,1))*cw);
   const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
   // グリッド
   ctx.strokeStyle="rgba(255,255,255,0.06)";ctx.lineWidth=1;
