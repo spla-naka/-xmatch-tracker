@@ -472,9 +472,10 @@ function renderDash(){
   const sets=getSets(viewSeason);
   const el=document.getElementById("dash-content");
   if(!sets.length){el.innerHTML=`<div class="empty">まだ記録がありません。<br>記録タブから入力してください。</div>`;return}
-  const totalW=sets.reduce((a,s)=>a+s.w,0),totalL=sets.reduce((a,s)=>a+s.l,0),total=totalW+totalL;
+  const filteredSets=filterRule==="ALL"?sets:sets.filter(s=>s.rule===filterRule);
+  const totalW=filteredSets.reduce((a,s)=>a+s.w,0),totalL=filteredSets.reduce((a,s)=>a+s.l,0),total=totalW+totalL;
   const winRate=total>0?Math.round(totalW/total*100):0;
-  const highestXp=Math.max(...sets.map(s=>s.xpAfter));
+  const highestXp=filteredSets.length?Math.max(...filteredSets.map(s=>s.xpAfter)):0;
   const latestXp={},startXp={};
   [...sets].reverse().forEach(s=>{if(!latestXp[s.rule])latestXp[s.rule]=s.xpAfter});
   sets.forEach(s=>{if(!startXp[s.rule])startXp[s.rule]=s.xpAfter});
