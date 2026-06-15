@@ -37,34 +37,28 @@ body::before{
 
 #app{max-width:680px;margin:0 auto;padding:20px 16px 60px;position:relative;z-index:1}
 
-/* ヘッダー */
 .header{display:flex;align-items:center;gap:14px;margin-bottom:26px}
 h1{font-size:22px;font-weight:800;letter-spacing:.04em;
   background:linear-gradient(100deg,#fff 0%,var(--yellow) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .header-sub{font-size:12px;color:var(--muted);letter-spacing:.06em;margin-top:2px}
 
-/* タブ */
 .tabs{display:flex;gap:6px;margin-bottom:26px;background:var(--bg2);padding:5px;border-radius:var(--radius-xl);border:1px solid var(--border)}
 .tab{flex:1;padding:11px;border-radius:18px;border:none;cursor:pointer;font-size:15px;font-weight:700;background:transparent;color:var(--muted);transition:all .22s;letter-spacing:.02em}
 .tab.active{background:linear-gradient(135deg,var(--blue),var(--blue-light));color:#fff;box-shadow:0 2px 16px var(--blue-glow)}
 
-/* シーズンタグ */
 .season-tag{display:inline-flex;align-items:center;gap:6px;
   background:rgba(26,86,196,0.15);border:1px solid rgba(26,86,196,0.4);
   border-radius:20px;padding:5px 14px;font-size:13px;color:var(--blue-light);margin-bottom:20px;font-weight:600}
 
-/* ラベル */
 .lbl{display:block;font-size:11px;color:var(--muted);margin-bottom:10px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .section{margin-bottom:22px}
 
-/* グリッド */
 .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3s{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
 
-/* ルールボタン */
 .rule-btn{
   display:flex;flex-direction:column;align-items:center;gap:6px;
   padding:12px 4px 10px;font-size:13px;font-weight:700;border-radius:var(--radius);cursor:pointer;
@@ -73,13 +67,11 @@ h1{font-size:22px;font-weight:800;letter-spacing:.04em;
 .rule-btn:hover{border-color:var(--blue);color:var(--white);background:var(--bg3)}
 .rule-btn svg{width:26px;height:26px;flex-shrink:0}
 
-/* 戦績ボタン */
 .res-btn{
   padding:12px;font-size:16px;font-weight:800;border-radius:var(--radius);cursor:pointer;
   border:1.5px solid var(--border);background:var(--bg2);transition:all .18s;letter-spacing:.02em}
 .res-btn:hover{background:var(--bg3)}
 
-/* XP入力 */
 .xp-row{display:flex;align-items:center;gap:12px}
 input[type=number],select{
   padding:12px 16px;font-size:17px;font-weight:600;border-radius:var(--radius);
@@ -89,7 +81,6 @@ input[type=number]:focus{border-color:var(--blue);box-shadow:0 0 0 3px var(--blu
 select:focus{border-color:var(--blue)}
 .diff{font-size:24px;font-weight:800;min-width:76px;text-align:right}
 
-/* 送信ボタン */
 .submit-btn{
   width:100%;padding:16px;font-size:16px;font-weight:800;border-radius:var(--radius);
   border:none;cursor:pointer;letter-spacing:.06em;transition:all .22s;
@@ -99,7 +90,6 @@ select:focus{border-color:var(--blue)}
   color:#fff;box-shadow:0 4px 20px var(--blue-glow)}
 .submit-btn.ready:active{transform:scale(0.985);box-shadow:0 2px 10px var(--blue-glow)}
 
-/* 記録行 */
 .row{
   display:flex;align-items:center;justify-content:space-between;
   padding:11px 16px;margin-bottom:7px;
@@ -107,7 +97,6 @@ select:focus{border-color:var(--blue)}
   transition:border-color .15s}
 .row:hover{border-color:rgba(26,86,196,0.5)}
 
-/* スタットカード */
 .stat{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:16px 12px;text-align:center;position:relative;overflow:hidden}
@@ -117,7 +106,6 @@ select:focus{border-color:var(--blue)}
 .stat-lbl{font-size:10px;color:var(--muted);margin-bottom:8px;letter-spacing:.08em;text-transform:uppercase;font-weight:600}
 .stat-val{font-size:24px;font-weight:800;color:var(--yellow)}
 
-/* ルール別カード */
 .rule-card{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);
   padding:16px 18px;transition:all .18s;position:relative;overflow:hidden}
@@ -126,7 +114,6 @@ select:focus{border-color:var(--blue)}
 .rule-card:hover{border-color:rgba(26,86,196,0.4);transform:translateY(-1px)}
 .rule-card-icon{width:28px;height:28px;margin-bottom:8px}
 
-/* フィルターボタン */
 .filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
 .filter-btn{
   display:inline-flex;align-items:center;gap:6px;
@@ -135,27 +122,22 @@ select:focus{border-color:var(--blue)}
 .filter-btn:hover{border-color:var(--muted);color:var(--white)}
 .filter-btn svg{width:14px;height:14px}
 
-/* グラフ */
 .chart-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-bottom:8px}
 .legend-dot{width:10px;height:10px;border-radius:2px;display:inline-block;margin-right:4px;vertical-align:middle}
 .chart-area{width:100%;overflow-x:auto;margin-bottom:20px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px}
 
-/* 全記録 */
 .records{max-height:240px;overflow-y:auto}
 
-/* メンタルケア */
 .mental{
   background:rgba(255,224,0,0.07);border:1px solid rgba(255,224,0,0.25);
   border-radius:var(--radius);padding:13px 16px;margin-bottom:18px;
   color:var(--yellow);font-size:14px;display:flex;justify-content:space-between;align-items:center;gap:8px;font-weight:500}
 .close-btn{font-size:12px;padding:4px 10px;border-radius:8px;border:1px solid rgba(255,224,0,0.35);background:transparent;cursor:pointer;color:var(--yellow);white-space:nowrap;font-weight:600}
 
-/* アーカイブ */
 .sep{border-top:1px solid var(--border);padding-top:18px;margin-top:22px}
 .archive-btn{font-size:13px;color:var(--muted);padding:9px 16px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;cursor:pointer;transition:all .15s;font-weight:600;letter-spacing:.02em}
 .archive-btn:hover{color:var(--white);border-color:var(--muted)}
 
-/* 最高XP演出 */
 .overlay{position:fixed;inset:0;z-index:9999;background:rgba(10,14,24,0.97);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:fadeInOut 3.5s ease forwards;pointer-events:none}
 .overlay-ring{width:230px;height:230px;border-radius:50%;border:3px solid var(--yellow);display:flex;flex-direction:column;align-items:center;justify-content:center;animation:ringPulse 0.75s infinite alternate;box-shadow:0 0 50px var(--yellow-glow),inset 0 0 50px rgba(255,224,0,0.06)}
 .overlay-title{font-size:24px;font-weight:800;color:var(--yellow);text-align:center;line-height:1.4;letter-spacing:.05em}
@@ -164,7 +146,6 @@ select:focus{border-color:var(--blue)}
 @keyframes fadeInOut{0%{opacity:0}8%{opacity:1}80%{opacity:1}100%{opacity:0}}
 @keyframes ringPulse{0%{transform:scale(1);box-shadow:0 0 30px var(--yellow-glow)}100%{transform:scale(1.05);box-shadow:0 0 70px rgba(255,224,0,0.45)}}
 
-/* インク装飾 */
 .splat{position:fixed;pointer-events:none;z-index:0}
 
 .hidden{display:none}
@@ -264,7 +245,6 @@ const RESULTS=[
 ];
 const COLORS={エリア:"#1A56C4",ヤグラ:"#FFE000",ホコ:"#ff6b35",アサリ:"#00e676"};
 
-// ルールアイコンSVG
 const ICONS={
   エリア:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="3" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/>
@@ -281,29 +261,20 @@ const ICONS={
     <circle cx="13" cy="3" r="2" fill="currentColor"/>
   </svg>`,
   ホコ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- 尾ひれ（上反り） -->
     <path d="M13 3 C10 3 8 1 9 0 C10 2 13 1.5 16 0 C17 1 15 3 13 3Z" fill="currentColor"/>
-    <!-- 背びれ -->
     <path d="M11 7 C11 5 12 4 13 3 C14 4 15 5 15 7Z" fill="currentColor" opacity=".85"/>
-    <!-- 胴体（シャチホコ反り） -->
     <path d="M8 22 C7 18 7 14 9 11 C10 9 11 8 13 7 C15 8 16 9 17 11 C19 14 19 18 18 22Z" fill="currentColor" opacity=".9"/>
-    <!-- 頭部 -->
     <path d="M9 11 C9 9 10 8 11 7 L15 7 C16 8 17 9 17 11 C17 13 15 14 13 14 C11 14 9 13 9 11Z" fill="currentColor"/>
-    <!-- 目 -->
     <circle cx="11.5" cy="10.5" r="1" fill="white" opacity=".9"/>
     <circle cx="11.8" cy="10.3" r="0.45" fill="#0a0e18"/>
-    <!-- うろこ線 -->
     <path d="M10 15 Q13 14 16 15" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
     <path d="M9.5 17.5 Q13 16.5 16.5 17.5" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
     <path d="M9.5 20 Q13 19 16.5 20" stroke="white" stroke-width="0.6" fill="none" opacity=".4"/>
-    <!-- 台座 -->
     <rect x="10" y="22" width="6" height="2" rx="1" fill="currentColor" opacity=".7"/>
     <rect x="9" y="23.5" width="8" height="1.5" rx=".75" fill="currentColor" opacity=".5"/>
   </svg>`,
   アサリ:`<svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- 貝殻外形（扇形） -->
     <path d="M13 22 C7 22 2 17 2 12 C2 8 5 5 8 4 C9.5 3.2 11 3 13 3 C15 3 16.5 3.2 18 4 C21 5 24 8 24 12 C24 17 19 22 13 22Z" fill="currentColor" opacity=".85"/>
-    <!-- 放射状の筋（貝殻らしさ） -->
     <line x1="13" y1="22" x2="13" y2="3" stroke="white" stroke-width="0.7" opacity=".35"/>
     <line x1="13" y1="22" x2="4" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/>
     <line x1="13" y1="22" x2="22" y2="8" stroke="white" stroke-width="0.7" opacity=".35"/>
@@ -311,17 +282,14 @@ const ICONS={
     <line x1="13" y1="22" x2="23.5" y2="13" stroke="white" stroke-width="0.6" opacity=".25"/>
     <line x1="13" y1="22" x2="7" y2="5.5" stroke="white" stroke-width="0.6" opacity=".25"/>
     <line x1="13" y1="22" x2="19" y2="5.5" stroke="white" stroke-width="0.6" opacity=".25"/>
-    <!-- 同心円弧（成長線） -->
     <path d="M7 18 Q13 20 19 18" stroke="white" stroke-width="0.8" fill="none" opacity=".4"/>
     <path d="M5.5 14 Q13 17 20.5 14" stroke="white" stroke-width="0.8" fill="none" opacity=".35"/>
     <path d="M5 10 Q13 13.5 21 10" stroke="white" stroke-width="0.7" fill="none" opacity=".3"/>
     <path d="M6 7 Q13 10 20 7" stroke="white" stroke-width="0.6" fill="none" opacity=".25"/>
-    <!-- 殻頂（てっぺんの丸み） -->
     <ellipse cx="13" cy="4" rx="3" ry="2" fill="currentColor"/>
   </svg>`
 };
 
-// ルールアイコン（小）
 const ICONS_SM={
   エリア:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="3" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="14" y="3" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="3" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".5"/><rect x="14" y="14" width="9" height="9" rx="2" fill="currentColor" opacity=".9"/><rect x="9" y="9" width="8" height="8" rx="1" fill="currentColor"/></svg>`,
   ヤグラ:`<svg width="14" height="14" viewBox="0 0 26 26" fill="none"><rect x="10" y="18" width="6" height="6" rx="1" fill="currentColor"/><rect x="11" y="8" width="4" height="11" rx="1" fill="currentColor"/><rect x="6" y="10" width="14" height="3" rx="1.5" fill="currentColor"/><rect x="9" y="5" width="8" height="5" rx="2" fill="currentColor" opacity=".8"/><circle cx="13" cy="3" r="2" fill="currentColor"/></svg>`,
@@ -496,16 +464,17 @@ function renderDash(){
   }).join("");
 
   const filterBtns=["ALL",...RULES].map(r=>{
-    const sel=filterRule===r;
-    const bg=sel?(r==="ALL"?"linear-gradient(135deg,var(--blue),var(--blue-light))":
+    const isSel=filterRule===r;
+    const bg=isSel?(r==="ALL"?"linear-gradient(135deg,var(--blue),var(--blue-light))":
       `linear-gradient(135deg,${COLORS[r]},${COLORS[r]}cc)`):"";
-    const col=sel?(r==="ヤグラ"?"#111":"#fff"):"var(--muted)";
-    const icon=r!=="ALL"?`<span style="color:${sel?(r==="ヤグラ"?"#111":"#fff"):COLORS[r]}">${ICONS_SM[r]}</span>`:"";
+    const col=isSel?(r==="ヤグラ"?"#111":"#fff"):"var(--muted)";
+    const icon=r!=="ALL"?`<span style="color:${isSel?(r==="ヤグラ"?"#111":"#fff"):COLORS[r]}">${ICONS_SM[r]}</span>`:"";
     return `<button class="filter-btn" onclick="setFilter('${r}')"
-      style="${sel?`background:${bg};color:${col};border-color:transparent;box-shadow:0 2px 10px rgba(0,0,0,0.3)`:""}">${icon}${r}</button>`;
+      style="${isSel?`background:${bg};color:${col};border-color:transparent;box-shadow:0 2px 10px rgba(0,0,0,0.3)`:""}">${icon}${r==="ALL"?"すべて":r}</button>`;
   }).join("");
 
-  const allRecords=[...sets].reverse().map(s=>`
+  /* ★修正: filteredSets を使ってフィルター連動 */
+  const allRecords=[...filteredSets].reverse().map(s=>`
     <div class="row">
       <span style="display:inline-flex;align-items:center;gap:6px;color:${COLORS[s.rule]};font-weight:700;width:74px">
         <span style="color:${COLORS[s.rule]}">${ICONS_SM[s.rule]}</span>${s.rule}
@@ -525,9 +494,9 @@ function renderDash(){
     <div class="filter-row">${filterBtns}</div>
     <div id="chart-container"></div>
     <div class="sec-lbl">全記録</div>
-    <div class="records">${allRecords}</div>
+    <div class="records">${allRecords||'<div class="empty" style="padding:24px 0">該当する記録がありません</div>'}</div>
   `;
-  const chartSets=filterRule==="ALL"?[]:filteredSets;
+
   if(filterRule==="ALL"){
     document.getElementById("chart-container").innerHTML=
       `<div style="color:var(--muted);font-size:13px;padding:16px 0 8px">ルールを選択するとXP推移グラフが表示されます。</div>`;
@@ -542,23 +511,29 @@ function renderDash(){
 function onSeasonChange(){viewSeason=document.getElementById("season-select").value;renderDash()}
 function setFilter(r){filterRule=r;renderDash()}
 
-function drawChart(sets){
-  const canvas=document.getElementById("chart");if(!canvas)return;
+/* ★drawChart 完全修正版
+   引数: sets=フィルター済みデータ, canvasId=canvas要素のID, h=高さ, rule=ルール名 */
+function drawChart(sets,canvasId,h,rule){
+  /* ①正しいIDでcanvas取得 */
+  const canvas=document.getElementById(canvasId);
+  if(!canvas||!sets||!sets.length)return;
   const dpr=window.devicePixelRatio||1;
   const W=canvas.parentElement.clientWidth-24||320;
-  canvas.width=W*dpr;canvas.height=240*dpr;canvas.style.width=W+"px";canvas.style.height="240px";
+  const H=h||240;
+  canvas.width=W*dpr;canvas.height=H*dpr;
+  canvas.style.width=W+"px";canvas.style.height=H+"px";
   const ctx=canvas.getContext("2d");ctx.scale(dpr,dpr);
-  const showRules=filterRule==="ALL"?RULES:[filterRule];
-  const pad={top:12,right:12,bottom:38,left:58};
-  const cw=W-pad.left-pad.right,ch=240-pad.top-pad.bottom;
-  const ruleData={};
-  showRules.forEach(r=>{
-    const pts=sets.map((s,i)=>({x:i,xpAfter:s.xpAfter}));
-    if(pts.length) ruleData[r]=pts;
-  });
+  const pad={top:14,right:16,bottom:42,left:62};
+  const cw=W-pad.left-pad.right,ch=H-pad.top-pad.bottom;
+  /* ②xpMin/xpMax/xpRange を正しく定義 */
+  const xpValues=sets.map(s=>s.xpAfter);
+  const rawMin=Math.min(...xpValues),rawMax=Math.max(...xpValues);
+  const margin=Math.max(50,Math.round((rawMax-rawMin)*0.1)||100);
+  const xpMin=rawMin-margin,xpMax=rawMax+margin,xpRange=xpMax-xpMin||1;
   const totalSets=sets.length;
-  const toX=i=>pad.left+(totalSets<=1?cw/2:(i/Math.max(totalSets-1,1))*cw);  const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
-  // グリッド
+  const toX=i=>pad.left+(totalSets<=1?cw/2:(i/(totalSets-1))*cw);
+  const toY=v=>pad.top+ch-((v-xpMin)/xpRange)*ch;
+  /* グリッド・Y軸 */
   ctx.strokeStyle="rgba(255,255,255,0.06)";ctx.lineWidth=1;
   for(let i=0;i<=4;i++){
     const y=pad.top+(ch/4)*i;
@@ -566,44 +541,49 @@ function drawChart(sets){
     ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="right";
     ctx.fillText(Math.round(xpMax-(xpRange/4)*i).toLocaleString(),pad.left-6,y+4);
   }
-  const step=Math.ceil(totalSets/8);
+  /* X軸 */
+  const step=Math.max(1,Math.ceil(totalSets/8));
   for(let i=0;i<totalSets;i+=step){
     ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="center";
     ctx.fillText(i+1,toX(i),pad.top+ch+18);
   }
   ctx.fillStyle="#6b7a99";ctx.font="11px sans-serif";ctx.textAlign="right";
-  ctx.fillText("セット数",pad.left+cw,pad.top+ch+34);
-  const DASHES=[[],[6,3],[2,4],[4,2,2,2]];
-  showRules.forEach((r,ri)=>{
-    const pts=ruleData[r];if(!pts||!pts.length)return;
-    // エリア下塗り
-    if(ri===0&&pts.length>1){
-      ctx.beginPath();
-      pts.forEach((p,i)=>{const x=toX(p.x),y=toY(p.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
-      ctx.lineTo(toX(pts[pts.length-1].x),pad.top+ch);
-      ctx.lineTo(toX(pts[0].x),pad.top+ch);ctx.closePath();
-      ctx.fillStyle=`rgba(${hexToRgb(COLORS[r])},0.07)`;ctx.fill();
-    }
-    ctx.setLineDash(DASHES[ri]||[]);
-    ctx.strokeStyle=COLORS[r];ctx.lineWidth=2.5;ctx.beginPath();
-    pts.forEach((p,i)=>{const x=toX(p.x),y=toY(p.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
-    ctx.stroke();
-    pts.forEach(p=>{
-      const x=toX(p.x),y=toY(p.xpAfter);
-      ctx.beginPath();ctx.arc(x,y,4.5,0,Math.PI*2);
-      ctx.fillStyle=COLORS[r];ctx.fill();
-      ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);
-      ctx.fillStyle="#0a0e18";ctx.fill();
-    });
-    ctx.setLineDash([]);
+  ctx.fillText("セット",pad.left+cw,pad.top+ch+34);
+  const color=COLORS[rule]||"#1A56C4";
+  /* エリア塗り */
+  if(sets.length>1){
+    ctx.beginPath();
+    sets.forEach((s,i)=>{const x=toX(i),y=toY(s.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+    ctx.lineTo(toX(sets.length-1),pad.top+ch);ctx.lineTo(toX(0),pad.top+ch);ctx.closePath();
+    ctx.fillStyle=`rgba(${hexToRgb(color)},0.1)`;ctx.fill();
+  }
+  /* 折れ線 */
+  ctx.setLineDash([]);ctx.strokeStyle=color;ctx.lineWidth=2.5;ctx.beginPath();
+  sets.forEach((s,i)=>{const x=toX(i),y=toY(s.xpAfter);i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)});
+  ctx.stroke();
+  /* 各点（勝敗で色分け） */
+  sets.forEach((s,i)=>{
+    const x=toX(i),y=toY(s.xpAfter),win=s.w>s.l;
+    ctx.beginPath();ctx.arc(x,y,5,0,Math.PI*2);ctx.fillStyle=color;ctx.fill();
+    ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fillStyle=win?"var(--green)":"var(--red)";ctx.fill();
   });
+  /* ③凡例（singleRule不要・常に1ルール表示） */
   const legEl=document.getElementById("chart-legend");
-  if(legEl&&!singleRule)legEl.innerHTML=showRules.filter(r=>ruleData[r]).map(r=>`
-    <span style="display:inline-flex;align-items:center;gap:5px;color:${COLORS[r]};font-weight:600">
-      <span class="legend-dot" style="background:${COLORS[r]}"></span>${r}
-    </span>`).join("");
+  if(legEl){
+    legEl.innerHTML=`
+      <span style="display:inline-flex;align-items:center;gap:5px;color:${color};font-weight:600">
+        <span class="legend-dot" style="background:${color}"></span>${rule} XP推移
+      </span>
+      <span style="display:inline-flex;align-items:center;gap:5px;font-size:11px">
+        <span class="legend-dot" style="background:var(--green)"></span>勝ち越し
+        <span class="legend-dot" style="background:var(--red);margin-left:6px"></span>負け越し
+      </span>`;
+  }
 }
-window.addEventListener("resize",()=>{if(document.getElementById("pane-dash")&&!document.getElementById("pane-dash").classList.contains("hidden"))renderDash()});
+
+window.addEventListener("resize",()=>{
+  if(!document.getElementById("pane-dash").classList.contains("hidden"))renderDash();
+});
 init();
 </script>
 </body>
